@@ -46,14 +46,14 @@ public class GeneticRobots
     double x = Math.random();
     double y = Math.random();
     double range = 0.1;
-    if (x > 0.5 && x < 0.5 + range)
-      x = 0.5 + range;
-    if (x < 0.5 && x > 0.5 - range)
-      x = 0.5 - range;
-    if (y > 0.5 && y < 0.5 + range)
-      y = 0.5 + range;
-    if (y < 0.5 && y > 0.5 - range)
-      y = 0.5 - range;
+    if (x > center.cartesian(0) && x < center.cartesian(0) + range)
+      x = center.cartesian(0) + range;
+    if (x < center.cartesian(0) && x > center.cartesian(0) - range)
+      x = center.cartesian(0) - range;
+    if (y > center.cartesian(1) && y < center.cartesian(1) + range)
+      y = center.cartesian(1) + range;
+    if (y < center.cartesian(1) && y > center.cartesian(1) - range)
+      y = center.cartesian(1) - range;
     return new Vector(x, y);
   }
 
@@ -72,6 +72,7 @@ public class GeneticRobots
     ground = new Ground();
     for (int i = 0; i < 5; i++)
       objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 42, 10, Color.white));
+    objects.add(new Bonus(0, 0));
     objects.add(player);
   }
 

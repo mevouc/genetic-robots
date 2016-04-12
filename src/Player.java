@@ -19,7 +19,7 @@ public class Player extends MovingObject
     this.life = this.maxLife;
     this.lifeBar = new LifeBar(0.3, 0.0032);
     this.position = GeneticRobots.getCenter(); // initial position
-    this.lookingDirection = this.direction;
+    this.lookingDirection = new Vector(0.001, 1);
     this.appearence = new PlayerBody(Color.black, 0.042, new Vector(2), 0);
     this.collider = new Collider(0.021, this.position, "player", this);
     GeneticRobots.addCollider(this.collider);
