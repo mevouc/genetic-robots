@@ -15,9 +15,8 @@ public class Robot extends MovingObject
     this.life = life;
     this.direction = new Vector(Math.random() - 0.5, Math.random() - 0.5);
     Color color = colors[(int)(Math.random() * 4)];
-    color = Color.red;
-    appearence = new RobotBody(color, 0.042, new Vector(2), 0);
-    collider = new Collider(0.021, position, "robot", this);
+    appearence = new RobotBody(color, 0.032, new Vector(2), 0);
+    collider = new Collider(0.025, position, "robot", this);
     GeneticRobots.addCollider(collider);
   }
 

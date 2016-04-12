@@ -10,12 +10,7 @@ public class RobotBody extends Template
     super(relativePos, angle);
     this.color = color;
     this.size = size;
-  }
-
-  private void draw(double x, double y, double angle)
-  {
-    SteveDraw.filledCircle(x, y, size / 2);
-    SteveDraw.setPenColor(Color.green);
+    childs.add(new RobotHead(new Vector(0.0, 0.0), 0.0));
   }
 
   private double bound(double a, double left, double right)
@@ -50,6 +45,11 @@ public class RobotBody extends Template
     Vector direction = position.minus(center);
     double distance = direction.magnitude();
     SteveDraw.filledTriangle(x, y, sizePointer(distance), direction.angle());
+  }
+
+  private void draw(double x, double y, double angle)
+  {
+    SteveDraw.filledCircle(x, y, size / 2);
   }
 
   public void display(Vector position, double angle)
