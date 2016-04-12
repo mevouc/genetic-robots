@@ -12,7 +12,7 @@ public class RobotBullet extends Template
 
   private void draw(double x, double y, double theta)
   {
-    SteveDraw.filledRectangle(x, y, 0.02, 0.04);
+    SteveDraw.filledRectangle(x, y, 0.016, 0.0042, theta);
   }
   
   protected void display(Vector position, double angle)

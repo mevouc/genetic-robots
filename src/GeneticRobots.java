@@ -41,6 +41,22 @@ public class GeneticRobots
     return canvasH;
   }
 
+  private static Vector randomRobotPosition()
+  {
+    double x = Math.random();
+    double y = Math.random();
+    double range = 0.1;
+    if (x > 0.5 && x < 0.5 + range)
+      x = 0.5 + range;
+    if (x < 0.5 && x > 0.5 - range)
+      x = 0.5 - range;
+    if (y > 0.5 && y < 0.5 + range)
+      y = 0.5 + range;
+    if (y < 0.5 && y > 0.5 - range)
+      y = 0.5 - range;
+    return new Vector(x, y);
+  }
+
   private static void init()
   {
     SteveDraw.setFont();
@@ -55,7 +71,7 @@ public class GeneticRobots
     player = new Player();
     ground = new Ground();
     for (int i = 0; i < 5; i++)
-      objects.add(new Robot(new Vector(Math.random(), Math.random()), 0.00025, 0.005, 42, 10));
+      objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 42, 10, Color.white));
     objects.add(player);
   }
 

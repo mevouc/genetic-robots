@@ -4,18 +4,22 @@ import java.awt.Color;
 public class Player extends MovingObject
 {
   private final Collider collider;
+  private final long maxLife;
   private long life;
+  private final LifeBar lifeBar;
   private boolean isShooting;
   private long lastShot;
 
   public Player()
   {
     super();
-    life = 42;
-    position = GeneticRobots.getCenter(); // initial position
-    appearence = new PlayerBody(Color.black, 0.042, new Vector(2), 0);
-    collider = new Collider(0.021, position, "player", this);
-    GeneticRobots.addCollider(collider);
+    this.maxLife = 42;
+    this.life = this.maxLife;
+    this.lifeBar = new LifeBar(0.3, 0.0032);
+    this.position = GeneticRobots.getCenter(); // initial position
+    this.appearence = new PlayerBody(Color.black, 0.042, new Vector(2), 0);
+    this.collider = new Collider(0.021, this.position, "player", this);
+    GeneticRobots.addCollider(this.collider);
   }
 
   private void processCommands()
@@ -25,6 +29,21 @@ public class Player extends MovingObject
     isLeft = SteveDraw.isKeyPressed(KeyEvent.VK_LEFT);
     isRight = SteveDraw.isKeyPressed(KeyEvent.VK_RIGHT);
     isShooting = SteveDraw.isKeyPressed(KeyEvent.VK_SPACE);
+  }
+
+  public long getLife()
+  {
+    return this.life;
+  }
+
+  public long getMaxLife()
+  {
+    return this.maxLife;
+  }
+
+  private void loseLife(long lifeLost)
+  {
+    this.life -= lifeLost;
   }
 
   private void die()
@@ -59,10 +78,20 @@ public class Player extends MovingObject
       Collision collision;
       if ((collision = collider.isColliding()) != null)
       {
-        if (collision.getTag() != "playerShot")
+        String tag = collision.getTag();
+        if (tag != "playerShot")
         {
-          this.position = oldPosition;
-          move(collision.getForce());
+          if (tag == "robotShot")
+          {
+            Shot shot = (Shot)(collision.getObject());
+            //loseLife(shot.getDamage());
+            shot.destroy();
+          }
+          else
+          {
+            this.position = oldPosition;
+            move(collision.getForce());
+          }
         }
       }
       collider.setPosition(this.position);
@@ -73,5 +102,6 @@ public class Player extends MovingObject
   {
     // player is always in the center of the screen
     appearence.render(GeneticRobots.getCenter(), direction.angle());
+    lifeBar.draw(new Vector(0.69, 0.98), life / (double)maxLife);
   }
 }

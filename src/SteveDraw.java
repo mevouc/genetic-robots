@@ -628,6 +628,33 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
 
 
     /**
+     * Draw a filled rectangle of given half width and half height, centered on (x, y) rotated of theta degrees.
+     * @param x the x-coordinate of the center of the rectangle
+     * @param y the y-coordinate of the center of the rectangle
+     * @param halfWidth is half the width of the rectangle
+     * @param halfHeight is half the height of the rectangle
+     * @param theta is the angle which the rectangle will be rotated of
+     * @throws IllegalArgumentException if halfWidth or halfHeight is negative
+     */
+    public static void filledRectangle(double x, double y, double halfWidth, double halfHeight, double theta)
+    {
+      Vector[] corners = { new Vector(halfWidth, halfHeight),
+                           new Vector(- halfWidth, halfHeight),
+                           new Vector(- halfWidth, - halfHeight), 
+                           new Vector(halfWidth, - halfHeight) };
+      double[] xs = new double[4];
+      double[] ys = new double[4];
+      for (int i = 0; i < 4; i++)
+      {
+        corners[i] = corners[i].rotate(theta);
+        xs[i] = x + corners[i].cartesian(0);
+        ys[i] = y + corners[i].cartesian(1);
+      }
+      filledPolygon(xs, ys);
+    }
+
+
+    /**
      * Draw a polygon with the given (x[i], y[i]) coordinates.
      * @param x an array of all the x-coordindates of the polygon
      * @param y an array of all the y-coordindates of the polygon
