@@ -1,3 +1,26 @@
+/*******************************************************************************
+ * Compilation: javac GeneticRobots.java
+ * Execution:   java GeneticRobots
+ *
+ * If you have gmake on Linux, a Makefile is provided. There are the command
+ * available, being in the root directory of the project.
+ * Compilation: make
+ * Execution:   make run
+ * 
+ * This class implemented the global part of the game Genetic Robots. It
+ * provides all fields necessary for many classes in the game, and implements
+ * the main methods of the game.
+ *
+ * TODO:
+ * -----
+ *  -  Game Over screen
+ *  - Leaderscore board
+ *  - Write down the instructions
+ *  - Genetically evolutive robots
+ *  - Add animations when destroying robots or taking bonus
+ *
+ * ****************************************************************************/
+
 import java.awt.Color;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -163,19 +186,7 @@ public class GeneticRobots
     {
       isPlaying = !(SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE));
       update();
-      render();/*
-      long nextFrame = System.currentTimeMillis() - startTime;
-      for (; nextFrame % framesFrequency != 0; nextFrame++)
-        continue;
-            try
-      {
-        Thread.sleep(nextFrame - (System.currentTimeMillis() - startTime));
-      }
-      catch (Exception e)
-      {}
-      /*
-      while ((now - startTime) % framesFrequency != 0)
-        now = System.currentTimeMillis();*/
+      render();
       nbStates = (System.currentTimeMillis() - lastFrameTime) / framesFrequency;
       lastFrameTime = System.currentTimeMillis();
     }
