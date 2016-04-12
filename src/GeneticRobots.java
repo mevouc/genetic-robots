@@ -72,7 +72,7 @@ public class GeneticRobots
     ground = new Ground();
     for (int i = 0; i < 5; i++)
       objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 42, 10, Color.white));
-    objects.add(new Bonus(0, 0));
+    objects.add(new Bonus(1, 0.02, 20));
     objects.add(player);
   }
 
@@ -199,9 +199,9 @@ public class GeneticRobots
   public static void main(String[] args)
   {
     // TODO reput run() in the try catch
-      run();
     try
     {
+      run();
     }
     catch (Exception e)
     {

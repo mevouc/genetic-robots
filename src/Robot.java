@@ -68,7 +68,7 @@ public class Robot extends MovingObject
       if ((collision = collider.isColliding()) != null)
       {
         String tag = collision.getTag();
-        if (tag != "robotShot")
+        if (tag != "robotShot" && tag != "bonus")
         {
           if (tag == "playerShot")
           {

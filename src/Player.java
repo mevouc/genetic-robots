@@ -58,9 +58,11 @@ public class Player extends MovingObject
     return this.maxLife;
   }
 
-  private void loseLife(long lifeLost)
+  private void affectLife(long lifeEffect)
   {
-    this.life -= lifeLost;
+    this.life += lifeEffect;
+    if (this.life > this.maxLife)
+      this.life = this.maxLife;
   }
 
   private void die()
@@ -117,8 +119,14 @@ public class Player extends MovingObject
           if (tag == "robotShot")
           {
             Shot shot = (Shot)(collision.getObject());
-            loseLife(shot.getDamage());
+            affectLife(- shot.getDamage());
             shot.destroy();
+          }
+          else if (tag == "bonus")
+          {
+            Bonus bonus = (Bonus)(collision.getObject());
+            affectLife(bonus.getLifePoints());
+            bonus.destroy();
           }
           else
           {
