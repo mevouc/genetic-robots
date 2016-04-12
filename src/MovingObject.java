@@ -6,7 +6,7 @@ public abstract class MovingObject extends GameObject
   private final double slowDown;
   protected final double maxSpeed;
   protected long elapsedTime;
-  protected boolean isUp, isDown, isLeft, isRight;
+  protected boolean goingUp, goingDown, goingLeft, goingRight;
 
   protected MovingObject(double speedUp, double maxSpeed)
   {
@@ -44,10 +44,10 @@ public abstract class MovingObject extends GameObject
   protected void accelerate()
   {
     double[] acceleration = { 0, 0 };
-    acceleration[0] += isRight ? 1 : 0;
-    acceleration[0] -= isLeft ? 1 : 0;
-    acceleration[1] += isUp ? 1 : 0;
-    acceleration[1] -= isDown ? 1 : 0;
+    acceleration[0] += goingRight ? 1 : 0;
+    acceleration[0] -= goingLeft ? 1 : 0;
+    acceleration[1] += goingUp ? 1 : 0;
+    acceleration[1] -= goingDown ? 1 : 0;
     accelerate(new Vector(acceleration));
   }
 

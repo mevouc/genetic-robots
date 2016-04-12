@@ -55,10 +55,10 @@ public class Robot extends MovingObject
       Vector oldPosition = this.position;
       this.elapsedTime = elapsedTime;
       Vector aim = GeneticRobots.getPlayer().getPosition().minus(position);
-      isRight = (aim.cartesian(0) > 0);
-      isLeft = (aim.cartesian(0) < 0);
-      isUp = (aim.cartesian(1) > 0);
-      isDown = (aim.cartesian(1) < 0);
+      goingRight = (aim.cartesian(0) > 0);
+      goingLeft = (aim.cartesian(0) < 0);
+      goingUp = (aim.cartesian(1) > 0);
+      goingDown = (aim.cartesian(1) < 0);
       shoot(direction);
       if (!speed.isZero())
         brake();

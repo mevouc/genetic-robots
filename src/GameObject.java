@@ -1,7 +1,7 @@
 public abstract class GameObject
 {
   protected Vector position;
-  protected Template appearence;
+  protected final Template appearence;
 
   public abstract void update(long elapsedTime);
   public abstract void render();

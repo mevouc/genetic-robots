@@ -144,7 +144,7 @@ public class Vector {
       double sa = Math.sin(Math.toRadians(angle));
       double x = this.cartesian(0);
       double y = this.cartesian(1);
-      return new Vector(ca * x + sa * y, sa * x - ca * y);
+      return new Vector(ca * x - sa * y, sa * x + ca * y);
     }
 
     // return a string representation of the vector
