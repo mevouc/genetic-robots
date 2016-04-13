@@ -14,7 +14,7 @@ public class Bonus extends FixedObject
     this.angularSpeed = angularSpeed;
     this.radius = radius;
     this.appearence = new BonusParticles(this.radius, Color.green);
-    this.collider = new Collider(0.021, this.position, "bonus", this);
+    this.collider = new Collider(0.021, this.position, Tag.BONUS, this);
     GeneticRobots.addCollider(this.collider);
     this.currentAngle = 0;
     this.lifePoints = lifePoints;

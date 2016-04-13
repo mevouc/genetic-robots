@@ -1,7 +1,7 @@
 public final class Collision
 {
   private final Vector force;
-  private final String tag;
+  private final Tag tag;
   private final GameObject obj;
 
   public Collision(Vector force, ICollider that)
@@ -16,7 +16,7 @@ public final class Collision
     return this.force;
   }
 
-  public String getTag()
+  public Tag getTag()
   {
     return this.tag;
   }

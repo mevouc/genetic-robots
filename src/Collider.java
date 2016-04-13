@@ -4,10 +4,10 @@ public class Collider implements ICollider
 {
   private final double radius;
   private Vector position;
-  private final String tag;
+  private final Tag tag;
   private final GameObject obj;
 
-  public Collider(double radius, Vector position, String tag, GameObject obj)
+  public Collider(double radius, Vector position, Tag tag, GameObject obj)
   {
     this.radius = radius;
     this.position = position;
@@ -55,7 +55,7 @@ public class Collider implements ICollider
     return null;
   }
 
-  public String getTag()
+  public Tag getTag()
   {
     return this.tag;
   }

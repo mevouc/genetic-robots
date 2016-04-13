@@ -2,31 +2,31 @@ import java.awt.Color;
 
 public class Robot extends MovingObject
 {
-  private final double firePower;
-  private final long maxLife;
-  private long life;
+  private final double damage;
+  private final double maxLife;
+  private double life;
   private final LifeBar lifeBar;
   private static Color[] colors = { Color.black, Color.blue, Color.red, Color.white };
   private final Color color;
   private final Collider collider;
   private long lastShot;
 
-  public Robot(Vector pos, double speedUp, double maxSpeed, double firePower, long life, Color color)
+  public Robot(Vector pos, double speedUp, double maxSpeed, double damage, double life, Color color)
   {
     super(speedUp, maxSpeed);
     this.position = pos;
-    this.firePower = firePower;
+    this.damage = damage;
     this.maxLife = life;
     this.life = this.maxLife;
     this.lifeBar = new LifeBar(0.03, 0.002);
     this.direction = new Vector(Math.random() - 0.5, Math.random() - 0.5);
     this.color = colors[(int)(Math.random() * 4)];
     appearence = new RobotBody(this.color, 0.032, new Vector(2), 0);
-    collider = new Collider(0.025, position, "robot", this);
+    collider = new Collider(0.025, position, Tag.ROBOT, this);
     GeneticRobots.addCollider(collider);
   }
 
-  private void loseLife(long lifeLost)
+  private void loseLife(double lifeLost)
   {
     this.life -= lifeLost;
   }
@@ -41,7 +41,7 @@ public class Robot extends MovingObject
   {
     if (System.currentTimeMillis() - lastShot < 500)
       return;
-    Shot shot = new Shot(position, direction.times(0.021), 1, "robotShot", color);
+    Shot shot = new Shot(position, direction.times(0.021), damage, Tag.ROBOTSHOT, color);
     GeneticRobots.addObject(shot);
     lastShot = System.currentTimeMillis();
   }
@@ -67,10 +67,10 @@ public class Robot extends MovingObject
       Collision collision;
       if ((collision = collider.isColliding()) != null)
       {
-        String tag = collision.getTag();
-        if (tag != "robotShot" && tag != "bonus")
+        Tag tag = collision.getTag();
+        if (tag != Tag.ROBOTSHOT && tag != Tag.BONUS)
         {
-          if (tag == "playerShot")
+          if (tag == Tag.PLAYERSHOT)
           {
             Shot shot = (Shot)(collision.getObject());
             loseLife(shot.getDamage());

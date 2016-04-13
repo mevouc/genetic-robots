@@ -5,18 +5,22 @@ import java.awt.Font;
 public class Menu
 {
   private static int bgR, bgG, bgB;
+  private static String instructions;
 
   static
   {
     bgR = 5;
     bgG = 5;
     bgB = 15;
+    instructions = "Kill as many Robots\nas you can but\n watch your time!\n"
+                 + "The Robots will evolve\nbetween each wave.\n"
+                 + "Try to get bonuses if\nyou are injured.";
   }
 
   private static void base(Color background)
   {
     SteveDraw.clear(background);
-    double y = GeneticRobots.getHeight() * 0.95 / GeneticRobots.getHeight();
+    double y = GeneticRobots.canvasH * 0.95 / GeneticRobots.canvasH;
     SteveDraw.setPenColor(new Color(186, 22, 44));
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 64));
     SteveDraw.text(0.5, y, "GENETIC ROBOTS");
@@ -25,12 +29,12 @@ public class Menu
   private static void generalMenu()
   {
     SteveDraw.setPenColor(Color.lightGray);
-    double y = GeneticRobots.getHeight() * 0.75 / GeneticRobots.getHeight();
+    double y = GeneticRobots.canvasH * 0.75 / GeneticRobots.canvasH;
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
     SteveDraw.text(0.5, y, "PLAY:\nPress ENTER");
-    y = GeneticRobots.getHeight() * 0.50 / GeneticRobots.getHeight();
+    y = GeneticRobots.canvasH * 0.50 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "INSTRUCTIONS:\nPress SPACE");
-    y = GeneticRobots.getHeight() * 0.25 / GeneticRobots.getHeight();
+    y = GeneticRobots.canvasH * 0.25 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "QUIT:\nPress ESCAPE");
   }
 
@@ -38,15 +42,15 @@ public class Menu
   {
     base(new Color(bgR, bgG, bgB));
     SteveDraw.setPenColor(Color.gray);
-    double y = GeneticRobots.getHeight() * 0.85 / GeneticRobots.getHeight();
+    double y = GeneticRobots.canvasH * 0.85 / GeneticRobots.canvasH;
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
     SteveDraw.text(0.5, y, "INSTRUCTIONS");
     SteveDraw.setPenColor(Color.lightGray);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
-    y = GeneticRobots.getHeight() * 0.65 / GeneticRobots.getHeight();
-    SteveDraw.text(0.5, y, "Test.\nLOL\nfoo\nXD");
+    y = GeneticRobots.canvasH * 0.70 / GeneticRobots.canvasH;
+    SteveDraw.text(0.5, y, instructions);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
-    y = GeneticRobots.getHeight() * 0.15 / GeneticRobots.getHeight();
+    y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "RETURN:\nPress ESCAPE");
     while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE)))
       continue;
@@ -56,19 +60,19 @@ public class Menu
   {
     base(new Color(bgR, bgG, bgB, 160));
     SteveDraw.setPenColor(Color.gray);
-    double y = GeneticRobots.getHeight() * 0.85 / GeneticRobots.getHeight();
+    double y = GeneticRobots.canvasH * 0.85 / GeneticRobots.canvasH;
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
     SteveDraw.text(0.5, y, "GAME OVER\nLEADERBOARD:");
     SteveDraw.setPenColor(Color.lightGray);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
-    y = GeneticRobots.getHeight() * 0.65 / GeneticRobots.getHeight();
+    y = GeneticRobots.canvasH * 0.65 / GeneticRobots.canvasH;
     /***
      * DRAW LEADERBOARD
      */
     SteveDraw.text(0.5, y, "Test.\nLOL\nfoo\nXD");
 
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
-    y = GeneticRobots.getHeight() * 0.15 / GeneticRobots.getHeight();
+    y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");
     SteveDraw.show();
     while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE)))

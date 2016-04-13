@@ -13,13 +13,12 @@
  *
  * TODO:
  * -----
- *  - Game Over screen
- *  - Enum instead of String for collision tags
  *  - Leaderscore board
  *  - Write down the instructions
  *  - Genetically evolutive robots
  *  - Add animations when destroying robots or taking bonus
  *  - Sound
+ *  - Remove all TODO instructions and useless comments
  *
  * ****************************************************************************/
 
@@ -39,15 +38,15 @@ public class GeneticRobots
   private static Collection<ICollider> colliders;
   private static Player player;
   private static Ground ground;
-  private static Vector center;
+  private static final Vector center;
   private static boolean isPlaying;
   private static boolean isDead;
   private static long nbStates; // number of game states since the last frame
   private static final long framesFrequency;
   private static long startTime;
   private static Chrono chrono;
-  private static final int canvasW;
-  private static final int canvasH;
+  public static final int canvasW;
+  public static final int canvasH;
 
   static
   {
@@ -55,16 +54,6 @@ public class GeneticRobots
     canvasH = 720;
     framesFrequency = 1000 / 60;
     center = new Vector(0.5, 0.5);
-  }
-
-  public static int getWidth()
-  {
-    return canvasW;
-  }
-
-  public static int getHeight()
-  {
-    return canvasH;
   }
 
   private static Vector randomRobotPosition()
@@ -98,8 +87,8 @@ public class GeneticRobots
     player = new Player("mevouc");
     ground = new Ground();
     for (int i = 0; i < 5; i++)
-      objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 42, 10, Color.white));
-    objects.add(new Bonus(1, 0.02, 20));
+      objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 1, 10, Color.white));
+    objects.add(new Bonus(5, 0.02, 10));
     objects.add(player);
   }
 

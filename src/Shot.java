@@ -3,9 +3,9 @@ import java.awt.Color;
 public class Shot extends MovingObject
 {
   private final Collider collider;
-  private final long damage;
+  private final double damage;
 
-  public Shot(Vector position, Vector speed, int damage, String tag)
+  public Shot(Vector position, Vector speed, int damage, Tag tag)
   {
     this.speed = speed;
     this.damage = damage;
@@ -15,7 +15,7 @@ public class Shot extends MovingObject
     appearence = new PlayerBullet(new Vector(2), 0);
   }
 
-  public Shot(Vector position, Vector speed, int damage, String tag, Color color)
+  public Shot(Vector position, Vector speed, double damage, Tag tag, Color color)
   {
     this.speed = speed;
     this.damage = damage;
@@ -44,7 +44,7 @@ public class Shot extends MovingObject
     }
   }
 
-  public long getDamage()
+  public double getDamage()
   {
     return this.damage;
   }

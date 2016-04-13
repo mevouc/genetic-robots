@@ -5,8 +5,8 @@ public class Player extends MovingObject
 {
   private final Score score;
   private final Collider collider;
-  private final long maxLife;
-  private long life;
+  private final double maxLife;
+  private double life;
   private final LifeBar lifeBar;
   private boolean isShooting;
   private long lastShot;
@@ -23,7 +23,7 @@ public class Player extends MovingObject
     this.position = GeneticRobots.getCenter(); // initial position
     this.lookingDirection = new Vector(0.001, 1);
     this.appearence = new PlayerBody(Color.black, 0.042, new Vector(2), 0);
-    this.collider = new Collider(0.021, this.position, "player", this);
+    this.collider = new Collider(0.021, this.position, Tag.PLAYER, this);
     GeneticRobots.addCollider(this.collider);
   }
 
@@ -50,17 +50,17 @@ public class Player extends MovingObject
      **********************************/
   }
 
-  public long getLife()
+  public double getLife()
   {
     return this.life;
   }
 
-  public long getMaxLife()
+  public double getMaxLife()
   {
     return this.maxLife;
   }
 
-  private void affectLife(long lifeEffect)
+  private void affectLife(double lifeEffect)
   {
     this.life += lifeEffect;
     if (this.life > this.maxLife)
@@ -77,7 +77,7 @@ public class Player extends MovingObject
     if (System.currentTimeMillis() - lastShot < 100)
       return;
     Vector gun = position.plus(direction.times(0.05));
-    Shot shot = new Shot(gun, direction.times(0.021), 1, "playerShot");
+    Shot shot = new Shot(gun, direction.times(0.021), 1, Tag.PLAYERSHOT);
     GeneticRobots.addObject(shot);
     lastShot = System.currentTimeMillis();
   }
@@ -115,16 +115,16 @@ public class Player extends MovingObject
       Collision collision;
       if ((collision = collider.isColliding()) != null)
       {
-        String tag = collision.getTag();
-        if (tag != "playerShot")
+        Tag tag = collision.getTag();
+        if (tag != Tag.PLAYERSHOT)
         {
-          if (tag == "robotShot")
+          if (tag == Tag.ROBOTSHOT)
           {
             Shot shot = (Shot)(collision.getObject());
             affectLife(- shot.getDamage());
             shot.destroy();
           }
-          else if (tag == "bonus")
+          else if (tag == Tag.BONUS)
           {
             Bonus bonus = (Bonus)(collision.getObject());
             affectLife(bonus.getLifePoints());

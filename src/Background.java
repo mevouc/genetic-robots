@@ -6,8 +6,8 @@ public class Background extends Template
   public Background()
   {
     super();
-    spriteSizeX = 512.0 / GeneticRobots.getWidth();
-    spriteSizeY = 512.0 / GeneticRobots.getHeight();
+    spriteSizeX = 512.0 / GeneticRobots.canvasW;
+    spriteSizeY = 512.0 / GeneticRobots.canvasH;
   }
 
   private void draw(double x, double y)

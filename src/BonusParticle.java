@@ -12,7 +12,9 @@ public class BonusParticle extends Template
 
   protected void display(Vector relativePos, double relativeAngle)
   {
-    SteveDraw.setPenColor(this.color);
+    SteveDraw.setPenColor(Color.white);
     SteveDraw.filledCircle(relativePos.cartesian(0), relativePos.cartesian(1), 0.004);
+    SteveDraw.setPenColor(this.color);
+    SteveDraw.circle(relativePos.cartesian(0), relativePos.cartesian(1), 0.004);
   }
 }

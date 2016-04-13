@@ -4,6 +4,6 @@ public interface ICollider
   public double getRadius();
   public Vector getPosition();
   public void setPosition(Vector position);
-  public String getTag();
+  public Tag getTag();
   public GameObject getObject();
 }
