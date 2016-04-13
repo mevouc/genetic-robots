@@ -14,6 +14,7 @@
  * TODO:
  * -----
  *  - Game Over screen
+ *  - Enum instead of String for collision tags
  *  - Leaderscore board
  *  - Write down the instructions
  *  - Genetically evolutive robots
@@ -40,6 +41,7 @@ public class GeneticRobots
   private static Ground ground;
   private static Vector center;
   private static boolean isPlaying;
+  private static boolean isDead;
   private static long nbStates; // number of game states since the last frame
   private static final long framesFrequency;
   private static long startTime;
@@ -87,12 +89,13 @@ public class GeneticRobots
     int defaultSize = SteveDraw.getFont().getSize();
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, defaultSize));
     isPlaying = true;
+    isDead = false;
     chrono = new Chrono();
     objects = new HashSet<GameObject>();
     objAddBuffer = new LinkedList<GameObject>();
     objRmBuffer = new LinkedList<GameObject>();
     colliders = new HashSet<ICollider>();
-    player = new Player();
+    player = new Player("mevouc");
     ground = new Ground();
     for (int i = 0; i < 5; i++)
       objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 42, 10, Color.white));
@@ -142,7 +145,7 @@ public class GeneticRobots
     
   private static void update()
   {
-    chrono.setChrono(System.currentTimeMillis() - startTime);
+    chrono.setTime(System.currentTimeMillis() - startTime);
     for (GameObject obj : objects)
       obj.update(nbStates);
     for (GameObject obj : objAddBuffer)
@@ -172,9 +175,11 @@ public class GeneticRobots
     SteveDraw.show((int)(nextFrame - (System.currentTimeMillis() - startTime)));
   }
 
-  public static void lose()
+  public static void lose(Score score)
   {
     isPlaying = false;
+    isDead = true;
+    score.setTimePlayed(chrono.getTime());
   }
 
   private static void play()
@@ -202,6 +207,10 @@ public class GeneticRobots
       if (running = Menu.exec())
       {
         play();
+        if (isDead)
+        {
+          Menu.deathScreen();
+        }
         while (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
           continue;
       }

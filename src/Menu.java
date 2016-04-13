@@ -4,9 +4,18 @@ import java.awt.Font;
 
 public class Menu
 {
-  private static void base()
+  private static int bgR, bgG, bgB;
+
+  static
   {
-    SteveDraw.clear(new Color(5, 5, 15));
+    bgR = 5;
+    bgG = 5;
+    bgB = 15;
+  }
+
+  private static void base(Color background)
+  {
+    SteveDraw.clear(background);
     double y = GeneticRobots.getHeight() * 0.95 / GeneticRobots.getHeight();
     SteveDraw.setPenColor(new Color(186, 22, 44));
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 64));
@@ -27,7 +36,7 @@ public class Menu
 
   private static void instructions()
   {
-    base();
+    base(new Color(bgR, bgG, bgB));
     SteveDraw.setPenColor(Color.gray);
     double y = GeneticRobots.getHeight() * 0.85 / GeneticRobots.getHeight();
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
@@ -43,9 +52,32 @@ public class Menu
       continue;
   }
 
+  public static void deathScreen()
+  {
+    base(new Color(bgR, bgG, bgB, 160));
+    SteveDraw.setPenColor(Color.gray);
+    double y = GeneticRobots.getHeight() * 0.85 / GeneticRobots.getHeight();
+    SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+    SteveDraw.text(0.5, y, "GAME OVER\nLEADERBOARD:");
+    SteveDraw.setPenColor(Color.lightGray);
+    SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
+    y = GeneticRobots.getHeight() * 0.65 / GeneticRobots.getHeight();
+    /***
+     * DRAW LEADERBOARD
+     */
+    SteveDraw.text(0.5, y, "Test.\nLOL\nfoo\nXD");
+
+    SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
+    y = GeneticRobots.getHeight() * 0.15 / GeneticRobots.getHeight();
+    SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");
+    SteveDraw.show();
+    while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE)))
+      continue;
+  }
+
   public static boolean exec()
   {
-    base();
+    base(new Color(bgR, bgG, bgB));
     generalMenu();
     SteveDraw.show();
     boolean waitChoice = true;
@@ -59,7 +91,7 @@ public class Menu
       else if (SteveDraw.isKeyPressed(KeyEvent.VK_SPACE))
       {
         instructions();
-        base();
+        base(new Color(bgR, bgG, bgB));
         generalMenu();
         while (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
           continue;

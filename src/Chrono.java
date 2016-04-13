@@ -4,10 +4,15 @@ public class Chrono
 
   public Chrono()
   {
-    time = 0;
+    this.time = 0;
   }
 
-  public void setChrono(long time)
+  public long getTime()
+  {
+    return this.time;
+  }
+
+  public void setTime(long time)
   {
     this.time = time;
   }

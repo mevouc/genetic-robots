@@ -3,6 +3,7 @@ import java.awt.Color;
 
 public class Player extends MovingObject
 {
+  private final Score score;
   private final Collider collider;
   private final long maxLife;
   private long life;
@@ -12,9 +13,10 @@ public class Player extends MovingObject
   private boolean lookingUp, lookingDown, lookingLeft, lookingRight;
   private Vector lookingDirection;
 
-  public Player()
+  public Player(String pseudo)
   {
     super();
+    this.score = new Score(pseudo);
     this.maxLife = 42;
     this.life = this.maxLife;
     this.lifeBar = new LifeBar(0.3, 0.0032);
@@ -67,7 +69,7 @@ public class Player extends MovingObject
 
   private void die()
   {
-    GeneticRobots.lose();
+    GeneticRobots.lose(this.score);
   }
 
   private void shoot(Vector direction)
