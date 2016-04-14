@@ -14,7 +14,6 @@
  * TODO:
  * -----
  *  - Leaderscore board
- *  - Write down the instructions
  *  - Genetically evolutive robots
  *  - Add animations when destroying robots or taking bonus
  *  - Sound

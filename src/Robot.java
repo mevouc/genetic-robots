@@ -6,7 +6,13 @@ public class Robot extends MovingObject
   private final double maxLife;
   private double life;
   private final LifeBar lifeBar;
-  private static Color[] colors = { Color.black, Color.blue, Color.red, Color.white };
+  private static Color[] colors = { new Color(240, 110, 170),
+                                    new Color(96, 92, 168),
+                                    new Color(23, 147, 209),
+                                    new Color(0, 166, 81),
+                                    new Color(255, 242, 0),
+									new Color(237, 28, 36),
+									new Color(247, 148, 29) };
   private final Color color;
   private final Collider collider;
   private long lastShot;
@@ -20,7 +26,7 @@ public class Robot extends MovingObject
     this.life = this.maxLife;
     this.lifeBar = new LifeBar(0.03, 0.002);
     this.direction = new Vector(Math.random() - 0.5, Math.random() - 0.5);
-    this.color = colors[(int)(Math.random() * 4)];
+    this.color = colors[(int)(Math.random() * colors.length)];
     appearence = new RobotBody(this.color, 0.032, new Vector(2), 0);
     collider = new Collider(0.025, position, Tag.ROBOT, this);
     GeneticRobots.addCollider(collider);
