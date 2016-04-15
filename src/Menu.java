@@ -6,6 +6,7 @@ public class Menu
 {
   private static int bgR, bgG, bgB;
   private static String instructions;
+  private static LeaderBoard leaderBoard;
 
   static
   {
@@ -15,6 +16,7 @@ public class Menu
     instructions = "Kill as many Robots\nas you can but\n watch your time!\n"
                  + "The Robots will evolve\nbetween each wave.\n"
                  + "Try to get bonuses if\nyou are injured.";
+    leaderBoard = new LeaderBoard("../leaderboard");
   }
 
   private static void base(Color background)
@@ -56,7 +58,7 @@ public class Menu
       continue;
   }
 
-  public static void deathScreen()
+  public static void deathScreen(Score newScore)
   {
     base(new Color(bgR, bgG, bgB, 160));
     SteveDraw.setPenColor(Color.gray);
@@ -66,11 +68,7 @@ public class Menu
     SteveDraw.setPenColor(Color.lightGray);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
     y = GeneticRobots.canvasH * 0.65 / GeneticRobots.canvasH;
-    /***
-     * DRAW LEADERBOARD
-     */
-    SteveDraw.text(0.5, y, "Test.\nLOL\nfoo\nXD");
-
+    SteveDraw.textRight(0.9, y, leaderBoard.addScore(newScore));
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
     y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");

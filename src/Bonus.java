@@ -8,9 +8,9 @@ public class Bonus extends FixedObject
   private double currentAngle;
   private final long lifePoints;
 
-  public Bonus(double angularSpeed, double radius, long lifePoints)
+  public Bonus(Vector position, double angularSpeed, double radius, long lifePoints)
   {
-    this.position = new Vector(Math.random(), Math.random());
+    this.position = position;
     this.angularSpeed = angularSpeed;
     this.radius = radius;
     this.appearence = new BonusParticles(this.radius, Color.green);

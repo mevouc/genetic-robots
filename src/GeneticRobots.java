@@ -13,8 +13,11 @@
  *
  * TODO:
  * -----
- *  - Leaderscore board
+ *  - no robots of same color
  *  - Genetically evolutive robots
+ *  - robots capable of hit player
+ *  - Prompt number of Wave and Robots Killed
+ *  - Choose pseudo at beginning
  *  - Add animations when destroying robots or taking bonus
  *  - Sound
  *  - Remove all TODO instructions and useless comments
@@ -36,6 +39,7 @@ public class GeneticRobots
   private static Collection<GameObject> objRmBuffer;
   private static Collection<ICollider> colliders;
   private static Player player;
+  private static Wave wave;
   private static Ground ground;
   private static final Vector center;
   private static boolean isPlaying;
@@ -85,10 +89,22 @@ public class GeneticRobots
     colliders = new HashSet<ICollider>();
     player = new Player("mevouc");
     ground = new Ground();
+    wave = new Wave(null);
+    /*
     for (int i = 0; i < 5; i++)
       objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 1, 10, Color.white));
-    objects.add(new Bonus(5, 0.02, 10));
+      */
     objects.add(player);
+    initWave();
+  }
+
+  private static void initWave()
+  {
+    wave = new Wave(wave);
+    for (Robot robot : wave.getRobots())
+      objects.add(robot);
+    for (Bonus bonus : wave.getBonuses())
+      objects.add(bonus);
   }
 
   public static Player getPlayer()
@@ -142,6 +158,8 @@ public class GeneticRobots
       objects.remove(obj);
     objAddBuffer = new LinkedList<GameObject>();
     objRmBuffer = new LinkedList<GameObject>();
+    if (wave.noRobots())
+      initWave();
   }
 
   private static void displayChrono(double x, double y)
@@ -197,7 +215,7 @@ public class GeneticRobots
         play();
         if (isDead)
         {
-          Menu.deathScreen();
+          Menu.deathScreen(player.getScore());
         }
         while (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
           continue;
@@ -208,9 +226,9 @@ public class GeneticRobots
   public static void main(String[] args)
   {
     // TODO reput run() in the try catch
+      run();
     try
     {
-      run();
     }
     catch (Exception e)
     {

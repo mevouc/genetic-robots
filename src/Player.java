@@ -50,6 +50,16 @@ public class Player extends MovingObject
      **********************************/
   }
 
+  public Score getScore()
+  {
+    return this.score;
+  }
+
+  public void incrementScore()
+  {
+    this.score.increment();
+  }
+
   public double getLife()
   {
     return this.life;
@@ -65,6 +75,8 @@ public class Player extends MovingObject
     this.life += lifeEffect;
     if (this.life > this.maxLife)
       this.life = this.maxLife;
+    if (this.life < 0)
+      this.life = 0;
   }
 
   private void die()

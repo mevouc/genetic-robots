@@ -7,6 +7,11 @@ public class Chrono
     this.time = 0;
   }
 
+  public Chrono(long time)
+  {
+    this.time = time;
+  }
+
   public long getTime()
   {
     return this.time;
@@ -15,6 +20,13 @@ public class Chrono
   public void setTime(long time)
   {
     this.time = time;
+  }
+
+  public String minAndSec()
+  {
+    long second = (time / 1000) % 60;
+    long minute = (time / (1000 * 60));
+    return String.format("%02d:%02d", minute, second);
   }
 
   public String toString()

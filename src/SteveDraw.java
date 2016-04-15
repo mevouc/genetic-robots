@@ -638,6 +638,8 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
      */
     public static void filledRectangle(double x, double y, double halfWidth, double halfHeight, double theta)
     {
+        if (halfWidth  < 0) throw new IllegalArgumentException("half width must be nonnegative");
+        if (halfHeight < 0) throw new IllegalArgumentException("half height must be nonnegative");
       Vector[] corners = { new Vector(halfWidth, halfHeight),
                            new Vector(- halfWidth, halfHeight),
                            new Vector(- halfWidth, - halfHeight), 
@@ -986,6 +988,13 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
     public static void textRight(double x, double y, String s) {
         offscreen.setFont(font);
         FontMetrics metrics = offscreen.getFontMetrics();
+        if (s.contains("\n"))
+        {
+          y += userY(metrics.getDescent()) * 0.075;
+          for(String line : s.split("\n"))
+            textRight(x, y -= (userY(metrics.getDescent()) * 0.075), line);
+          return;
+        }
         double xs = scaleX(x);
         double ys = scaleY(y);
         int ws = metrics.stringWidth(s);
