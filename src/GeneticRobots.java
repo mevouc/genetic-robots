@@ -13,7 +13,6 @@
  *
  * TODO:
  * -----
- *  - Choose pseudo at beginning
  *  - Add animations when destroying robots or taking bonus
  *  - Sound
  *  - Remove all TODO instructions and useless comments

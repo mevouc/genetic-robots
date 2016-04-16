@@ -108,24 +108,44 @@ public class Menu
   {
     while (SteveDraw.isKeyPressed(KeyEvent.VK_ENTER))
       continue;
-    base(new Color(bgR, bgG, bgB));
+    Color bg = new Color(bgR, bgG, bgB);
+    base(bg);
     SteveDraw.setPenColor(Color.lightGray);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
     double y = GeneticRobots.canvasH * 0.7 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "Enter a pseudo\n(less than 14 characters)\n");
     y = GeneticRobots.canvasH * 0.5 / GeneticRobots.canvasH;
     SteveDraw.filledRectangle(0.5, y, 0.45, 0.05);
+    SteveDraw.setPenColor(bg);
+    SteveDraw.textLeft(0.10, y, "|");
     String pseudo = "";
-    char c;
-    while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ENTER)))
+    char c = 0;
+    boolean ok = false;
+    while (!ok)
     {
       if (SteveDraw.hasNextKeyTyped() && ((c = SteveDraw.nextKeyTyped()) != '\n'))
       {
+        switch (c)
+        {
+        case '\b':
+          if (pseudo.length() > 0)
+            pseudo = pseudo.substring(0, pseudo.length() - 1);
+          break;
+        case 27:
+        case 3:
+        case 4:
+          break;
+        default:
+          if (pseudo.length() < 14)
+            pseudo += c;
+        }
+        SteveDraw.setPenColor(Color.lightGray);
         SteveDraw.filledRectangle(0.5, y, 0.45, 0.05);
-        SteveDraw.textLeft(0.05, y, pseudo);
+        SteveDraw.setPenColor(bg);
+        SteveDraw.textLeft(0.10, y, pseudo + '|');
         SteveDraw.show();
-        pseudo += c;
       }
+      ok = SteveDraw.isKeyPressed(KeyEvent.VK_ENTER) || (c == 3) || (c == 4);
     }
     return pseudo;
   }
