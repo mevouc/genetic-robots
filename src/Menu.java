@@ -13,9 +13,9 @@ public class Menu
     bgR = 5;
     bgG = 5;
     bgB = 15;
-    instructions = "Kill as many Robots\nas you can but\n watch your time!\n"
-                 + "The Robots will evolve\nbetween each wave.\n"
-                 + "Try to get bonuses if\nyou are injured.";
+    instructions = "Use SPACE to shoot.\n\n"
+                 + "Use Arrow Keys to move.\n\n"
+                 + "Use WASD to change\nyour shoot angle.\n";
     leaderBoard = new LeaderBoard("../leaderboard");
   }
 
@@ -60,7 +60,7 @@ public class Menu
 
   public static void deathScreen(Score newScore)
   {
-    base(new Color(bgR, bgG, bgB, 160));
+    base(new Color(bgR, bgG, bgB, 220));
     SteveDraw.setPenColor(Color.gray);
     double y = GeneticRobots.canvasH * 0.85 / GeneticRobots.canvasH;
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
@@ -68,7 +68,7 @@ public class Menu
     SteveDraw.setPenColor(Color.lightGray);
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
     y = GeneticRobots.canvasH * 0.65 / GeneticRobots.canvasH;
-    SteveDraw.textRight(0.9, y, leaderBoard.addScore(newScore));
+    SteveDraw.textRight(0.92, y, leaderBoard.addScore(newScore));
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
     y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");
@@ -102,5 +102,31 @@ public class Menu
     }
     SteveDraw.setFont();
     return choice;
+  }
+
+  public static String askPseudo()
+  {
+    while (SteveDraw.isKeyPressed(KeyEvent.VK_ENTER))
+      continue;
+    base(new Color(bgR, bgG, bgB));
+    SteveDraw.setPenColor(Color.lightGray);
+    SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
+    double y = GeneticRobots.canvasH * 0.7 / GeneticRobots.canvasH;
+    SteveDraw.text(0.5, y, "Enter a pseudo\n(less than 14 characters)\n");
+    y = GeneticRobots.canvasH * 0.5 / GeneticRobots.canvasH;
+    SteveDraw.filledRectangle(0.5, y, 0.45, 0.05);
+    String pseudo = "";
+    char c;
+    while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ENTER)))
+    {
+      if (SteveDraw.hasNextKeyTyped() && ((c = SteveDraw.nextKeyTyped()) != '\n'))
+      {
+        SteveDraw.filledRectangle(0.5, y, 0.45, 0.05);
+        SteveDraw.textLeft(0.05, y, pseudo);
+        SteveDraw.show();
+        pseudo += c;
+      }
+    }
+    return pseudo;
   }
 }

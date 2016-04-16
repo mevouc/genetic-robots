@@ -1,10 +1,11 @@
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 
-public class Player extends MovingObject
+public class Player extends MovingObject implements IShooter
 {
   private final Score score;
   private final Collider collider;
+  private double inflictedDamage;
   private final double maxLife;
   private double life;
   private final LifeBar lifeBar;
@@ -17,6 +18,7 @@ public class Player extends MovingObject
   {
     super();
     this.score = new Score(pseudo);
+    this.inflictedDamage = 0;
     this.maxLife = 42;
     this.life = this.maxLife;
     this.lifeBar = new LifeBar(0.3, 0.0032);
@@ -29,15 +31,15 @@ public class Player extends MovingObject
 
   private void processCommands()
   {
-    goingUp = SteveDraw.isKeyPressed(KeyEvent.VK_UP);
-    goingDown = SteveDraw.isKeyPressed(KeyEvent.VK_DOWN);
-    goingLeft = SteveDraw.isKeyPressed(KeyEvent.VK_LEFT);
-    goingRight = SteveDraw.isKeyPressed(KeyEvent.VK_RIGHT);
-    isShooting = SteveDraw.isKeyPressed(KeyEvent.VK_SPACE);
-    lookingUp = SteveDraw.isKeyPressed(KeyEvent.VK_W);
-    lookingDown = SteveDraw.isKeyPressed(KeyEvent.VK_S);
-    lookingLeft = SteveDraw.isKeyPressed(KeyEvent.VK_A);
-    lookingRight = SteveDraw.isKeyPressed(KeyEvent.VK_D);
+    this.goingUp = SteveDraw.isKeyPressed(KeyEvent.VK_UP);
+    this.goingDown = SteveDraw.isKeyPressed(KeyEvent.VK_DOWN);
+    this.goingLeft = SteveDraw.isKeyPressed(KeyEvent.VK_LEFT);
+    this.goingRight = SteveDraw.isKeyPressed(KeyEvent.VK_RIGHT);
+    this.isShooting = SteveDraw.isKeyPressed(KeyEvent.VK_SPACE);
+    this.lookingUp = SteveDraw.isKeyPressed(KeyEvent.VK_W);
+    this.lookingDown = SteveDraw.isKeyPressed(KeyEvent.VK_S);
+    this.lookingLeft = SteveDraw.isKeyPressed(KeyEvent.VK_A);
+    this.lookingRight = SteveDraw.isKeyPressed(KeyEvent.VK_D);
     /**********************************
      * TODO REMOVE DVORAK-FR CONFIG
      **********************************/
@@ -84,14 +86,19 @@ public class Player extends MovingObject
     GeneticRobots.lose(this.score);
   }
 
-  private void shoot(Vector direction)
+  public void shoot(Vector direction)
   {
     if (System.currentTimeMillis() - lastShot < 100)
       return;
     Vector gun = position.plus(direction.times(0.05));
-    Shot shot = new Shot(gun, direction.times(0.021), 1, Tag.PLAYERSHOT);
+    Shot shot = new Shot(gun, direction.times(0.021), 1, Tag.PLAYERSHOT, this);
     GeneticRobots.addObject(shot);
     lastShot = System.currentTimeMillis();
+  }
+
+  public void reward(double damage)
+  {
+    this.inflictedDamage += damage;
   }
 
   private void rotate(long elapsedTime)
@@ -135,6 +142,7 @@ public class Player extends MovingObject
             Shot shot = (Shot)(collision.getObject());
             affectLife(- shot.getDamage());
             shot.destroy();
+            shot.rewardShooter();
           }
           else if (tag == Tag.BONUS)
           {
@@ -147,9 +155,16 @@ public class Player extends MovingObject
             this.position = oldPosition;
             move(collision.getForce());
           }
+          if (tag == Tag.ROBOT)
+          {
+            Robot robot = (Robot)collision.getObject();
+            affectLife(- robot.getLife());
+            robot.loseLife(robot.getLife());
+            robot.reward(robot.getLife());
+          }
         }
       }
-      collider.setPosition(this.position);
+      this.collider.setPosition(this.position);
     }
   }
 

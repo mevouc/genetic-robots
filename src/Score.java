@@ -23,6 +23,11 @@ public class Score implements Comparable<Score>
       this.pseudo += " " + tokens[i];
   }
 
+  public long getRobotsKilled()
+  {
+    return this.robotsKilled;
+  }
+
   public void setTimePlayed(long timePlayed)
   {
     this.timePlayed = timePlayed;
@@ -48,7 +53,7 @@ public class Score implements Comparable<Score>
       else
         pseudo[i] = ' ';
     }
-    return String.format("%s %d %s", new String(pseudo), this.robotsKilled, new Chrono(this.timePlayed).minAndSec());
+    return String.format("%s %2d %s", new String(pseudo), this.robotsKilled, new Chrono(this.timePlayed).minAndSec());
   }
 
   public int compareTo(Score that)

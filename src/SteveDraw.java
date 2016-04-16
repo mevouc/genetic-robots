@@ -972,6 +972,13 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
     public static void textLeft(double x, double y, String s) {
         offscreen.setFont(font);
         FontMetrics metrics = offscreen.getFontMetrics();
+        if (s.contains("\n"))
+        {
+          y += userY(metrics.getDescent()) * 0.075;
+          for(String line : s.split("\n"))
+            textLeft(x, y -= (userY(metrics.getDescent()) * 0.075), line);
+          return;
+        }
         double xs = scaleX(x);
         double ys = scaleY(y);
         int hs = metrics.getDescent();
@@ -1020,6 +1027,8 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
     public static void show(int t) {
         defer = false;
         draw();
+        if (t < 0)
+          t = 0;
         try { Thread.sleep(t); }
         catch (InterruptedException e) { System.out.println("Error sleeping"); }
         defer = true;

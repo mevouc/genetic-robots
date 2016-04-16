@@ -4,25 +4,33 @@ public class Shot extends MovingObject
 {
   private final Collider collider;
   private final double damage;
+  private final IShooter shooter;
 
-  public Shot(Vector position, Vector speed, int damage, Tag tag)
+  public Shot(Vector position, Vector speed, int damage, Tag tag, IShooter shooter)
   {
     this.speed = speed;
     this.damage = damage;
     this.position = position;
     this.collider = new Collider(0.005, position, tag, this);
     GeneticRobots.addCollider(this.collider);
-    appearence = new PlayerBullet(new Vector(2), 0);
+    this.appearence = new PlayerBullet(new Vector(2), 0);
+    this.shooter = shooter;
   }
 
-  public Shot(Vector position, Vector speed, double damage, Tag tag, Color color)
+  public Shot(Vector position, Vector speed, double damage, Tag tag, Color color, IShooter shooter)
   {
     this.speed = speed;
     this.damage = damage;
     this.position = position;
     this.collider = new Collider(0.005, position, tag, this);
     GeneticRobots.addCollider(this.collider);
-    appearence = new RobotBullet(new Vector(2), 0, color);
+    this.appearence = new RobotBullet(new Vector(2), 0, color);
+    this.shooter = shooter;
+  }
+
+  public void rewardShooter()
+  {
+    this.shooter.reward(this.damage);
   }
 
   public void destroy()

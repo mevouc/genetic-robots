@@ -200,7 +200,7 @@ public class LeaderBoard
 
   public String toString()
   {
-    String str = "Pseudo     Robots Time\n";
+    String str = "Pseudo     Robots  Time\n";
     for (int i = 0; i < this.scores.size(); i++)
       str += (i + 1) + " " + this.scores.get(i).format() + "\n";
     return str;

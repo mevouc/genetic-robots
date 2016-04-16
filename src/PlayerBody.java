@@ -16,7 +16,6 @@ public class PlayerBody extends Template
   private void draw(double x, double y, double angle)
   {
     SteveDraw.picture(x, y, "img/playerbody.png", 0);
-    SteveDraw.setPenColor(Color.green);
   }
 
   public void display(Vector position, double angle)

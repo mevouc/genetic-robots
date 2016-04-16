@@ -13,10 +13,6 @@
  *
  * TODO:
  * -----
- *  - no robots of same color
- *  - Genetically evolutive robots
- *  - robots capable of hit player
- *  - Prompt number of Wave and Robots Killed
  *  - Choose pseudo at beginning
  *  - Add animations when destroying robots or taking bonus
  *  - Sound
@@ -75,7 +71,7 @@ public class GeneticRobots
     return new Vector(x, y);
   }
 
-  private static void init()
+  private static void init(String pseudo)
   {
     SteveDraw.setFont();
     int defaultSize = SteveDraw.getFont().getSize();
@@ -87,14 +83,10 @@ public class GeneticRobots
     objAddBuffer = new LinkedList<GameObject>();
     objRmBuffer = new LinkedList<GameObject>();
     colliders = new HashSet<ICollider>();
-    player = new Player("mevouc");
+    player = new Player(pseudo);
     ground = new Ground();
-    wave = new Wave(null);
-    /*
-    for (int i = 0; i < 5; i++)
-      objects.add(new Robot(randomRobotPosition(), 0.00025, 0.005, 1, 10, Color.white));
-      */
     objects.add(player);
+    wave = null;
     initWave();
   }
 
@@ -162,10 +154,12 @@ public class GeneticRobots
       initWave();
   }
 
-  private static void displayChrono(double x, double y)
+  private static void displayInfo(double x, double y)
   {
     SteveDraw.setPenColor(Color.white);
     SteveDraw.textLeft(x, y, "Time: " + chrono);
+    SteveDraw.textLeft(x, y - 0.021, "Wave: " + wave.getNumber());
+    SteveDraw.textLeft(x, y - 0.042, "Robots killed: " + player.getScore().getRobotsKilled());
   }
 
   private static void render()
@@ -174,7 +168,7 @@ public class GeneticRobots
     ground.render();
     for (GameObject obj : objects)
       obj.render();
-    displayChrono(0.01, 0.98);
+    displayInfo(0.01, 0.98);
     long nextFrame = System.currentTimeMillis() - startTime;
     for(; nextFrame % framesFrequency != 0; nextFrame++)
       continue;
@@ -190,7 +184,7 @@ public class GeneticRobots
 
   private static void play()
   {
-    init();
+    init(Menu.askPseudo());
     nbStates = 0;
     startTime = System.currentTimeMillis();
     long lastFrameTime = startTime;
