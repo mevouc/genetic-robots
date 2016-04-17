@@ -15,6 +15,8 @@
  * -----
  *  - Add animations when destroying robots or taking bonus
  *  - Sound
+ *  - Come back to menu during pseudo choosing
+ *  - Confirmation before coming back to menu during the game
  *  - Remove all TODO instructions and useless comments
  *
  * ****************************************************************************/

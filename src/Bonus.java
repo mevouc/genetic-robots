@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class Bonus extends FixedObject
+public class Bonus extends GameObject
 {
   private final double angularSpeed;
   private final double radius;
@@ -39,6 +39,6 @@ public class Bonus extends FixedObject
 
   public void render()
   {
-    appearence.render(GeneticRobots.centerOnPlayer(this.position), this.currentAngle);
+    this.appearence.render(GeneticRobots.centerOnPlayer(this.position), this.currentAngle);
   }
 }

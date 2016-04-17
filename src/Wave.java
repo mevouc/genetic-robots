@@ -81,9 +81,9 @@ public class Wave
       double currMaxSpeed = randomize(defMaxSpeed, factorMaxSpeed);
       double currDamage = randomize(defDamage, factorMaxSpeed);
       double currFireFreq = randomize(defFireFreq, factorFireFreq);
-      int randomIndex = (int)(Math.random() * colors.size());
-      Color currColor = colors.get(randomIndex);
-      this.colors.remove(randomIndex);
+      Collections.shuffle(this.colors);
+      Color currColor = this.colors.get(0);
+      this.colors.remove(0);
       this.robots.add(new Robot(randomPosition(GeneticRobots.getPlayer().getPosition()), 0.00025, currMaxSpeed, currDamage, currLife, currFireFreq, currColor));
     }
     for (int i = 0; i < 1 + (int)(Math.random()); i++)

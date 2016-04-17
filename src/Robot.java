@@ -43,6 +43,8 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     GeneticRobots.rmCollider(this.collider);
     GeneticRobots.rmObject(this);
     GeneticRobots.getPlayer().incrementScore();
+    Explosion boom = new Explosion(this.position);
+    GeneticRobots.addObject(boom);
   }
 
   public boolean isDead()

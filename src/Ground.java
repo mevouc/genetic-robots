@@ -1,4 +1,4 @@
-public class Ground extends FixedObject
+public class Ground extends GameObject
 {
   public Ground()
   {

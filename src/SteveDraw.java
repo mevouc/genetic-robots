@@ -822,7 +822,7 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
      * @throws IllegalArgumentException if the width height are negative
      * @throws IllegalArgumentException if the image is corrupt
      */
-/*    public static void picture(double x, double y, String s, double w, double h) {
+    public static void picture(double x, double y, String s, double w, double h) {
         Image image = getImage(s);
         double xs = scaleX(x);
         double ys = scaleY(y);
@@ -871,7 +871,7 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
      * @param degrees is the number of degrees to rotate counterclockwise
      * @throws IllegalArgumentException if the image is corrupt
      */
-    public static void picture(double x, double y, String s, double n, double degrees)
+/*    public static void picture(double x, double y, String s, double n, double degrees)
     {
       
       // http://stackoverflow.com/questions/672916/how-to-get-image-height-and-width-using-java
@@ -887,7 +887,7 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
         throw new IllegalArgumentException("Invalid path.");
       }
     }
-
+*/
     /**
      * Draw picture (gif, jpg, or png) centered on (x, y), rotated
      * given number of degrees, rescaled to w-by-h.

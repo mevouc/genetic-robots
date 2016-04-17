@@ -108,6 +108,8 @@ public class Menu
   {
     while (SteveDraw.isKeyPressed(KeyEvent.VK_ENTER))
       continue;
+    while (SteveDraw.hasNextKeyTyped())
+      SteveDraw.nextKeyTyped();
     Color bg = new Color(bgR, bgG, bgB);
     base(bg);
     SteveDraw.setPenColor(Color.lightGray);
