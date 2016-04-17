@@ -47,6 +47,13 @@ public class Wave
     return (a + b) / 2.0;
   }
 
+  private double avoidNeg(double n)
+  {
+    if (n < 0)
+      return 0;
+    return n;
+  }
+
   public Wave(Wave previous)
   {
     this.colors = new ArrayList<Color>(Arrays.asList(this.colorsArray));
@@ -55,10 +62,10 @@ public class Wave
     if (previous == null)
     {
       this.number = 1;
-      this.defLife = 10;
-      this.defMaxSpeed = 0.005;
-      this.defDamage = 1;
-      this.defFireFreq = 500;
+      this.defLife = 1;
+      this.defMaxSpeed = 0.001;
+      this.defDamage = 0.5;
+      this.defFireFreq = 0.001;
     }
     else
     {
@@ -71,16 +78,16 @@ public class Wave
       this.defDamage = avg(best1.getDamage(), best2.getDamage());
       this.defFireFreq = avg(best1.getFireFreq(), best2.getFireFreq());
     }
-    double factorLife = 0.5;
-    double factorMaxSpeed = 0.2;
-    double factorDamage = 0.5;
-    double factorFireFreq = 0.1;
+    double factorLife = 0.75;
+    double factorMaxSpeed = 0.75;
+    double factorDamage = 0.75;
+    double factorFireFreq = 0.75;
     for (int i = 0; i < 7; i++)
     {
-      double currLife = randomize(defLife, factorLife);
-      double currMaxSpeed = randomize(defMaxSpeed, factorMaxSpeed);
-      double currDamage = randomize(defDamage, factorMaxSpeed);
-      double currFireFreq = randomize(defFireFreq, factorFireFreq);
+      double currLife = avoidNeg(randomize(defLife, factorLife));
+      double currMaxSpeed = avoidNeg(randomize(defMaxSpeed, factorMaxSpeed));
+      double currDamage = avoidNeg(randomize(defDamage, factorMaxSpeed));
+      double currFireFreq = avoidNeg(randomize(defFireFreq, factorFireFreq));
       Collections.shuffle(this.colors);
       Color currColor = this.colors.get(0);
       this.colors.remove(0);

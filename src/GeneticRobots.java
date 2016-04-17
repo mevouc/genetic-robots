@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 import java.lang.Thread;
+import javafx.embed.swing.JFXPanel;
 
 public class GeneticRobots
 {
@@ -52,6 +53,7 @@ public class GeneticRobots
     canvasH = 720;
     framesFrequency = 1000 / 60;
     center = new Vector(0.5, 0.5);
+    JFXPanel fxPanel = new JFXPanel();
   }
 
   private static Vector randomRobotPosition()

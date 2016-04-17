@@ -11,7 +11,7 @@ all:
 	${CC} ${FLAGS} ${SRC}
 
 run:
-	java ${OUT}
+	java -classpath . ${OUT}
 
 clean:
 	rm -rf *.class *~

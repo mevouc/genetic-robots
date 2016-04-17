@@ -7,6 +7,7 @@ public class Menu
   private static int bgR, bgG, bgB;
   private static String instructions;
   private static LeaderBoard leaderBoard;
+  private static Sound music;
 
   static
   {
@@ -17,6 +18,8 @@ public class Menu
                  + "Use Arrow Keys to move.\n\n"
                  + "Use WASD to change\nyour shoot angle.\n";
     leaderBoard = new LeaderBoard("../leaderboard");
+    // http://opengameart.org/content/enchanted-tiki-86
+    music = new Sound("snd/enchanted_tiki_86.wav");
   }
 
   private static void base(Color background)
@@ -73,6 +76,7 @@ public class Menu
     y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");
     SteveDraw.show();
+    music.play();
     while (!(SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE)))
       continue;
   }
@@ -82,6 +86,8 @@ public class Menu
     base(new Color(bgR, bgG, bgB));
     generalMenu();
     SteveDraw.show();
+    if (!music.isPlaying())
+      music.play();
     boolean waitChoice = true;
     String pseudo = null;
     while (waitChoice)
@@ -107,6 +113,7 @@ public class Menu
         SteveDraw.show();
       }
     }
+    music.stop();
     SteveDraw.setFont();
     return pseudo;
   }

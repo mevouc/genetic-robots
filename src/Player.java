@@ -90,6 +90,9 @@ public class Player extends MovingObject implements IShooter
   {
     if (System.currentTimeMillis() - lastShot < 100)
       return;
+    // http://opengameart.org/content/sci-fi-laser-fire-sfx
+    Sound piou = new Sound("snd/laserfire02.wav");
+    piou.play();
     Vector gun = position.plus(direction.times(0.05));
     Shot shot = new Shot(gun, direction.times(0.021), 1, Tag.PLAYERSHOT, this);
     GeneticRobots.addObject(shot);

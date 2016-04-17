@@ -14,13 +14,16 @@ public class Score implements Comparable<Score>
   public Score(String[] tokens)
   {
     this("");
-    if (tokens.length < 3)
+    if (tokens.length < 2)
       System.err.println("Invalid format of String.");
     this.robotsKilled = Integer.parseInt(tokens[0]);
     this.timePlayed = Integer.parseInt(tokens[1]);
-    this.pseudo = tokens[2];
-    for (int i = 3; i < tokens.length; i++)
-      this.pseudo += " " + tokens[i];
+    if (tokens.length >= 3)
+    {
+      this.pseudo = tokens[2];
+      for (int i = 3; i < tokens.length; i++)
+        this.pseudo += " " + tokens[i];
+    }
   }
 
   public long getRobotsKilled()
