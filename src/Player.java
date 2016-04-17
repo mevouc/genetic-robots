@@ -137,15 +137,14 @@ public class Player extends MovingObject implements IShooter
         Tag tag = collision.getTag();
         if (tag != Tag.PLAYERSHOT)
         {
-          if (tag == Tag.ROBOTSHOT)
+          boolean robotShot = (tag == Tag.ROBOTSHOT);
+          boolean robotColl = (tag == Tag.ROBOT);
+          if (robotShot)
           {
             Shot shot = (Shot)(collision.getObject());
             affectLife(- shot.getDamage());
             shot.destroy();
             shot.rewardShooter();
-            double bloodAngle = collision.getForce().times(-1).angle();
-            Blood blood = new Blood(this.position, bloodAngle, Color.white);
-            GeneticRobots.addObject(blood);
           }
           else if (tag == Tag.BONUS)
           {
@@ -158,12 +157,18 @@ public class Player extends MovingObject implements IShooter
             this.position = oldPosition;
             move(collision.getForce());
           }
-          if (tag == Tag.ROBOT)
+          if (robotColl)
           {
             Robot robot = (Robot)collision.getObject();
             affectLife(- robot.getLife());
             robot.loseLife(robot.getLife());
             robot.reward(robot.getLife());
+          }
+          if(robotColl || robotShot)
+          {
+            double bloodAngle = collision.getForce().angle();
+            Blood blood = new Blood(this.position, bloodAngle, Color.white);
+            GeneticRobots.addObject(blood);
           }
         }
       }

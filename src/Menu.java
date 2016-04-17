@@ -77,19 +77,26 @@ public class Menu
       continue;
   }
 
-  public static boolean exec()
+  public static String exec()
   {
     base(new Color(bgR, bgG, bgB));
     generalMenu();
     SteveDraw.show();
     boolean waitChoice = true;
-    boolean choice = true;
+    String pseudo = null;
     while (waitChoice)
     {
       if (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
-        waitChoice = choice = false;
+        waitChoice = false;
       else if (SteveDraw.isKeyPressed(KeyEvent.VK_ENTER))
-        waitChoice = !(choice = true);
+      {
+        pseudo = askPseudo();
+        base(new Color(bgR, bgG, bgB));
+        generalMenu();
+        while (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+          continue;
+        waitChoice = (pseudo == null);
+      }
       else if (SteveDraw.isKeyPressed(KeyEvent.VK_SPACE))
       {
         instructions();
@@ -101,7 +108,7 @@ public class Menu
       }
     }
     SteveDraw.setFont();
-    return choice;
+    return pseudo;
   }
 
   public static String askPseudo()
@@ -113,8 +120,11 @@ public class Menu
     Color bg = new Color(bgR, bgG, bgB);
     base(bg);
     SteveDraw.setPenColor(Color.lightGray);
+    SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
+    double y = GeneticRobots.canvasH * 0.15 / GeneticRobots.canvasH;
+    SteveDraw.text(0.5, y, "RETURN TO MENU:\nPress ESCAPE");
     SteveDraw.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 42));
-    double y = GeneticRobots.canvasH * 0.7 / GeneticRobots.canvasH;
+    y = GeneticRobots.canvasH * 0.7 / GeneticRobots.canvasH;
     SteveDraw.text(0.5, y, "Enter a pseudo\n(less than 14 characters)\n");
     y = GeneticRobots.canvasH * 0.5 / GeneticRobots.canvasH;
     SteveDraw.filledRectangle(0.5, y, 0.45, 0.05);
@@ -125,7 +135,11 @@ public class Menu
     boolean ok = false;
     while (!ok)
     {
-      if (SteveDraw.hasNextKeyTyped() && ((c = SteveDraw.nextKeyTyped()) != '\n'))
+      if (SteveDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+      {
+        pseudo = null;
+      }
+      else if (SteveDraw.hasNextKeyTyped() && ((c = SteveDraw.nextKeyTyped()) != 27))
       {
         switch (c)
         {
@@ -133,7 +147,7 @@ public class Menu
           if (pseudo.length() > 0)
             pseudo = pseudo.substring(0, pseudo.length() - 1);
           break;
-        case 27:
+        case '\n':
         case 3:
         case 4:
           break;
@@ -147,7 +161,7 @@ public class Menu
         SteveDraw.textLeft(0.10, y, pseudo + '|');
         SteveDraw.show();
       }
-      ok = SteveDraw.isKeyPressed(KeyEvent.VK_ENTER) || (c == 3) || (c == 4);
+      ok = (pseudo == null) || c == '\n' || (c == 3) || (c == 4);
     }
     return pseudo;
   }

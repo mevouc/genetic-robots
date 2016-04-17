@@ -13,7 +13,7 @@ public class BloodParticles extends ScalableTemplate
   public void display(Vector position, double angle)
   {
     double varAngle = 90;
-    int nbParticles = 10;
+    int nbParticles = 5;
     SteveDraw.setPenColor(this.color);
     for (int i = 0; i < nbParticles; i++)
     {

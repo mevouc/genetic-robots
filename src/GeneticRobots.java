@@ -13,9 +13,7 @@
  *
  * TODO:
  * -----
- *  - Add animations when destroying robots or taking bonus
  *  - Sound
- *  - Come back to menu during pseudo choosing
  *  - Confirmation before coming back to menu during the game
  *  - Remove all TODO instructions and useless comments
  *
@@ -183,9 +181,9 @@ public class GeneticRobots
     score.setTimePlayed(chrono.getTime());
   }
 
-  private static void play()
+  private static void play(String pseudo)
   {
-    init(Menu.askPseudo());
+    init(pseudo);
     nbStates = 0;
     startTime = System.currentTimeMillis();
     long lastFrameTime = startTime;
@@ -203,11 +201,12 @@ public class GeneticRobots
   {
     SteveDraw.setCanvasSize(canvasW, canvasH);
     boolean running = true;
+    String pseudo = null;
     while (running)
     {
-      if (running = Menu.exec())
+      if (running = ((pseudo = Menu.exec()) != null))
       {
-        play();
+        play(pseudo);
         if (isDead)
         {
           Menu.deathScreen(player.getScore());

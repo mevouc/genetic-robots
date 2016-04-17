@@ -133,7 +133,7 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
             Shot shot = (Shot)(collision.getObject());
             loseLife(shot.getDamage());
             shot.destroy();
-            double bloodAngle = collision.getForce().times(1).angle();
+            double bloodAngle = collision.getForce().angle();
             Blood blood = new Blood(this.position, bloodAngle, this.color);
             GeneticRobots.addObject(blood);
           }
