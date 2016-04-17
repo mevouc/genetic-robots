@@ -62,9 +62,9 @@ public class Wave
     if (previous == null)
     {
       this.number = 1;
-      this.defLife = 5;
-      this.defMaxSpeed = 0.002;
-      this.defDamage = 0.5;
+      this.defLife = 10;
+      this.defMaxSpeed = 0.005;
+      this.defDamage = 1;
       this.defFireFreq = 0.002;
     }
     else
@@ -72,11 +72,11 @@ public class Wave
       this.number = previous.number + 1;
       Collections.sort(previous.robots);
       Robot best1 = previous.robots.get(0);
-    //  Robot best2 = previous.robots.get(1);
-      this.defLife = best1.getMaxLife();//avg(best1.getMaxLife(), best2.getMaxLife());
-      this.defMaxSpeed = best1.getMaxSpeed();//avg(best1.getMaxSpeed(), best2.getMaxSpeed());
-      this.defDamage = best1.getDamage();//avg(best1.getDamage(), best2.getDamage());
-      this.defFireFreq = best1.getFireFreq();//avg(best1.getFireFreq(), best2.getFireFreq());
+      Robot best2 = previous.robots.get(1);
+      this.defLife = avg(best1.getMaxLife(), best2.getMaxLife());
+      this.defMaxSpeed = avg(best1.getMaxSpeed(), best2.getMaxSpeed());
+      this.defDamage = avg(best1.getDamage(), best2.getDamage());
+      this.defFireFreq = avg(best1.getFireFreq(), best2.getFireFreq());
     }
     // TODO RM DEBUG
     System.out.println();

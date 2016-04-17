@@ -5,8 +5,14 @@ public class Shot extends MovingObject
   private final Collider collider;
   private final double damage;
   private final IShooter shooter;
-  private final Sound sound;
+  private static final Sound player;
+  private static final Sound robot;
 
+  static
+  {
+    player = new Sound("snd/laserfire02.wav");
+    robot = new Sound("snd/laserfire01.wav");
+  }
   public Shot(Vector position, Vector speed, int damage, Tag tag, IShooter shooter)
   {
     this.speed = speed;
@@ -17,8 +23,7 @@ public class Shot extends MovingObject
     this.appearence = new PlayerBullet(new Vector(2), 0);
     this.shooter = shooter;
     // http://opengameart.org/content/sci-fi-laser-fire-sfx
-    this.sound = new Sound("snd/laserfire02.wav");
-    this.sound.play();
+    player.play();
   }
 
   public Shot(Vector position, Vector speed, double damage, Tag tag, Color color, IShooter shooter)
@@ -31,8 +36,7 @@ public class Shot extends MovingObject
     this.appearence = new RobotBullet(new Vector(2), 0, color);
     this.shooter = shooter;
     // http://opengameart.org/content/sci-fi-laser-fire-sfx
-    this.sound = new Sound("snd/laserfire01.wav");
-    this.sound.play();
+    robot.play();
   }
 
   public void rewardShooter()
@@ -44,7 +48,6 @@ public class Shot extends MovingObject
   {
     GeneticRobots.rmCollider(this.collider);
     GeneticRobots.rmObject(this);
-    this.sound.stop();
   }
 
   public void update(long elasedTime)

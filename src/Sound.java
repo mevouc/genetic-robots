@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 import javafx.embed.swing.JFXPanel;
@@ -35,7 +36,11 @@ public class Sound
 
   public void play()
   {
-    this.mediaPlayer.play();
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    executor.submit(() ->
+    {
+      this.mediaPlayer.play();
+    });
   }
 
   public void stop()
@@ -52,7 +57,7 @@ public class Sound
     return false;
   }
 }
-/*
+/*/
 public class Sound
 {
   private final String path;
@@ -94,6 +99,7 @@ public class Sound
   {
     try
     {
+      this.clip.setFramePosition(0);
       this.clip.start();
     }
     catch (Exception e)
@@ -107,6 +113,7 @@ public class Sound
     try
     {
       this.clip.stop();
+      this.clip.close();
     }
     catch (Exception e)
     {
@@ -128,4 +135,3 @@ public class Sound
     return bool;
   }
 }
-*/

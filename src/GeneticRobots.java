@@ -13,8 +13,6 @@
  *
  * TODO:
  * -----
- *  - Sound
- *  - Confirmation before coming back to menu during the game
  *  - Remove all TODO instructions and useless comments
  *
  * ****************************************************************************/
