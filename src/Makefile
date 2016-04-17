@@ -2,7 +2,7 @@
 
 CC=javac
 
-FLAGS=-Xdiags:verbose
+FLAGS=
 
 OUT=GeneticRobots
 SRC=${OUT}.java

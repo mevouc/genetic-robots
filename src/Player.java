@@ -40,7 +40,8 @@ public class Player extends MovingObject implements IShooter
     this.lookingUp = this.lookingUp || SteveDraw.isKeyPressed(KeyEvent.VK_Z);
     this.lookingDown = SteveDraw.isKeyPressed(KeyEvent.VK_S);
     this.lookingLeft = SteveDraw.isKeyPressed(KeyEvent.VK_A);
-    this.lookingLeft = this.lookingLeft || SteveDraw.isKeyPressed(KeyEvent.VK_Q);
+    this.lookingLeft = this.lookingLeft
+      || SteveDraw.isKeyPressed(KeyEvent.VK_Q);
     this.lookingRight = SteveDraw.isKeyPressed(KeyEvent.VK_D);
     /**********************************
      * TODO REMOVE DVORAK-FR CONFIG

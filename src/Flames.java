@@ -10,6 +10,7 @@ public class Flames extends ScalableTemplate
     int indexAnim = (int)(5 * (1 - this.scale));
     if (indexAnim >= 5)
       return;
-    SteveDraw.picture(position.cartesian(0), position.cartesian(1), "img/explosion" + indexAnim + ".png");
+    SteveDraw.picture(position.cartesian(0), position.cartesian(1),
+        "img/explosion" + indexAnim + ".png");
   }
 }

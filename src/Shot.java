@@ -14,7 +14,8 @@ public class Shot extends MovingObject
     player = new Sound("snd/laserfire02.wav");
     robot = new Sound("snd/laserfire01.wav");
   }
-  public Shot(Vector position, Vector speed, int damage, Tag tag, IShooter shooter)
+  public Shot(Vector position, Vector speed, int damage, Tag tag,
+      IShooter shooter)
   {
     this.speed = speed;
     this.damage = damage;
@@ -26,7 +27,8 @@ public class Shot extends MovingObject
     player.play();
   }
 
-  public Shot(Vector position, Vector speed, double damage, Tag tag, Color color, IShooter shooter)
+  public Shot(Vector position, Vector speed, double damage, Tag tag,
+      Color color, IShooter shooter)
   {
     this.speed = speed;
     this.damage = damage;
@@ -51,14 +53,15 @@ public class Shot extends MovingObject
 
   public void update(long elasedTime)
   {
-    double distance = position.minus(GeneticRobots.getPlayer().getPosition()).magnitude();
+    Vector toPlayer = position.minus(GeneticRobots.getPlayer().getPosition());
+    double distance = toPlayer.magnitude();
     if (distance > 1)
-      this.destroy();
+      destroy();
     else
     {
       this.elapsedTime = elapsedTime;
       move();
-      collider.setPosition(this.position);
+      this.collider.setPosition(this.position);
     }
   }
 
@@ -69,6 +72,7 @@ public class Shot extends MovingObject
 
   public void render()
   {
-    appearence.render(GeneticRobots.centerOnPlayer(position), direction.angle());
+    this.appearence.render(GeneticRobots.centerOnPlayer(position),
+        direction.angle());
   }
 }

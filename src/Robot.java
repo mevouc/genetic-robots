@@ -13,7 +13,8 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
   private final Collider collider;
   private long lastShot;
 
-  public Robot(Vector pos, double speedUp, double maxSpeed, double damage, double life, double fireFreq, Color color)
+  public Robot(Vector pos, double speedUp, double maxSpeed, double damage,
+      double life, double fireFreq, Color color)
   {
     super(speedUp, maxSpeed);
     this.position = pos;
@@ -56,7 +57,8 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
   {
     if (System.currentTimeMillis() - this.lastShot < 1 / this.fireFreq)
       return;
-    Shot shot = new Shot(this.position, direction.times(0.021), this.damage, Tag.ROBOTSHOT, this.color, this);
+    Shot shot = new Shot(this.position, direction.times(0.021), this.damage,
+        Tag.ROBOTSHOT, this.color, this);
     GeneticRobots.addObject(shot);
     this.lastShot = System.currentTimeMillis();
   }
@@ -151,7 +153,8 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
   public void render()
   {
     Vector displayPos = GeneticRobots.centerOnPlayer(position);
-    appearence.render(displayPos, direction.angle());
-    lifeBar.draw(displayPos.plus(new Vector(0.0, 0.03)), life / (double)maxLife);
+    this.appearence.render(displayPos, direction.angle());
+    this.lifeBar.draw(displayPos.plus(new Vector(0.0, 0.03)),
+        this.life / (double)this.maxLife);
   }
 }

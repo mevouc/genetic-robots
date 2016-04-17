@@ -8,7 +8,8 @@ public class Bonus extends GameObject
   private double currentAngle;
   private final long lifePoints;
 
-  public Bonus(Vector position, double angularSpeed, double radius, long lifePoints)
+  public Bonus(Vector position, double angularSpeed, double radius,
+      long lifePoints)
   {
     this.position = position;
     this.angularSpeed = angularSpeed;
@@ -39,6 +40,7 @@ public class Bonus extends GameObject
 
   public void render()
   {
-    this.appearence.render(GeneticRobots.centerOnPlayer(this.position), this.currentAngle);
+    this.appearence.render(GeneticRobots.centerOnPlayer(this.position),
+        this.currentAngle);
   }
 }

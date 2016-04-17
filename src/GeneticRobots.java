@@ -156,7 +156,8 @@ public class GeneticRobots
     SteveDraw.setPenColor(Color.white);
     SteveDraw.textLeft(x, y, "Time: " + chrono);
     SteveDraw.textLeft(x, y - 0.021, "Wave: " + wave.getNumber());
-    SteveDraw.textLeft(x, y - 0.042, "Robots killed: " + player.getScore().getRobotsKilled());
+    SteveDraw.textLeft(x, y - 0.042, "Robots killed: "
+        + player.getScore().getRobotsKilled());
   }
 
   private static void render()

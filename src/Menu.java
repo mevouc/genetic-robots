@@ -16,8 +16,8 @@ public class Menu
     bgB = 15;
     instructions = "Use SPACE to shoot.\n\n"
                  + "Use Arrow Keys to move.\n\n"
-                 + "Use WASD to change\nyour shoot angle.\n";
-    leaderBoard = new LeaderBoard("../leaderboard");
+                 + "Use WASD or ZQSD to\nchange your shoot angle.\n";
+    leaderBoard = new LeaderBoard("leaderboard");
     // http://opengameart.org/content/enchanted-tiki-86
     music = new Sound("snd/enchanted_tiki_86.wav");
   }
@@ -146,7 +146,8 @@ public class Menu
       {
         pseudo = null;
       }
-      else if (SteveDraw.hasNextKeyTyped() && ((c = SteveDraw.nextKeyTyped()) != 27))
+      else if (SteveDraw.hasNextKeyTyped()
+          && ((c = SteveDraw.nextKeyTyped()) != 27))
       {
         switch (c)
         {

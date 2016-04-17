@@ -9,7 +9,8 @@ public abstract class ScalableTemplate extends Template
     this.nativeScale = nativeScale;
   }
 
-  public ScalableTemplate(Vector relativePos, double relativeAngle, double nativeScale)
+  public ScalableTemplate(Vector relativePos, double relativeAngle,
+      double nativeScale)
   {
     super(relativePos, relativeAngle);
     this.nativeScale = nativeScale;

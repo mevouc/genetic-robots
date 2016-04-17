@@ -14,13 +14,14 @@ public class Wave
   private final ArrayList<Robot> robots;
   private final Collection<Bonus> bonuses;
   private static ArrayList<Color> colors;
-  private static Color[] colorsArray  = { new Color(240, 110, 170),
-                                          new Color(96, 92, 168),
-                                          new Color(23, 147, 209),
-                                          new Color(0, 166, 81),
-                                          new Color(255, 242, 0),
-                                          new Color(237, 28, 36),
-                                          new Color(247, 148, 29) };
+  private static Color[] colorsArray  = {
+      new Color(240, 110, 170),
+      new Color(96, 92, 168),
+      new Color(23, 147, 209),
+      new Color(0, 166, 81),
+      new Color(255, 242, 0),
+      new Color(237, 28, 36),
+      new Color(247, 148, 29) };
 
   // random position around origin
   private static Vector randomPosition(Vector origin)
@@ -99,11 +100,14 @@ public class Wave
       Collections.shuffle(this.colors);
       Color currColor = this.colors.get(0);
       this.colors.remove(0);
-      this.robots.add(new Robot(randomPosition(GeneticRobots.getPlayer().getPosition()), 0.00025, currMaxSpeed, currDamage, currLife, currFireFreq, currColor));
+      Vector randPos = randomPosition(GeneticRobots.getPlayer().getPosition());
+      this.robots.add(new Robot(randPos, 0.00025, currMaxSpeed, currDamage,
+            currLife, currFireFreq, currColor));
     }
     for (int i = 0; i < 1 + (int)(Math.random()); i++)
     {
-      this.bonuses.add(new Bonus(randomPosition(GeneticRobots.getPlayer().getPosition()).times(2), 5, 0.02, 10));
+      Vector randPos = randomPosition(GeneticRobots.getPlayer().getPosition());
+      this.bonuses.add(new Bonus(randPos.times(2), 5, 0.02, 10));
     }
   }
 
