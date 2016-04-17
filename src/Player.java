@@ -143,6 +143,9 @@ public class Player extends MovingObject implements IShooter
             affectLife(- shot.getDamage());
             shot.destroy();
             shot.rewardShooter();
+            double bloodAngle = collision.getForce().times(-1).angle();
+            Blood blood = new Blood(this.position, bloodAngle, Color.white);
+            GeneticRobots.addObject(blood);
           }
           else if (tag == Tag.BONUS)
           {

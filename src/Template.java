@@ -26,10 +26,10 @@ public abstract class Template
 
   public void render(Vector position, double angle)
   {
-    double theta = Math.toRadians(angle + relativeAngle);
+    double theta = angle + relativeAngle;
     Vector where = position.plus(relativePos.rotate(angle));
-    this.display(where, Math.toDegrees(theta));
+    this.display(where, theta);
     for (Template child : childs)
-      child.render(where, Math.toDegrees(theta));
+      child.render(where, theta);
   }
 }
