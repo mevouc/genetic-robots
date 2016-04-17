@@ -43,9 +43,6 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     GeneticRobots.rmCollider(this.collider);
     GeneticRobots.rmObject(this);
     GeneticRobots.getPlayer().incrementScore();
-    // http://opengameart.org/content/rumbleexplosion
-    Sound boom = new Sound("snd/rumble.wav");
-    boom.play();
     Explosion explosion = new Explosion(this.position);
     GeneticRobots.addObject(explosion);
   }
@@ -59,9 +56,6 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
   {
     if (System.currentTimeMillis() - this.lastShot < 1 / this.fireFreq)
       return;
-    // http://opengameart.org/content/sci-fi-laser-fire-sfx
-    Sound piou = new Sound("snd/laserfire01.wav");
-    piou.play();
     Shot shot = new Shot(this.position, direction.times(0.021), this.damage, Tag.ROBOTSHOT, this.color, this);
     GeneticRobots.addObject(shot);
     this.lastShot = System.currentTimeMillis();

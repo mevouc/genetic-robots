@@ -13,7 +13,12 @@ public abstract class Animation extends GameObject
       this.appearence.setScale(1 - this.timeLeft / (double)this.timeToAppear);
     this.timeLeft -= elapsedTime;
     if (this.timeLeft <= 0)
-      GeneticRobots.rmObject(this);
+      destroy();
+  }
+
+  protected void destroy()
+  {
+    GeneticRobots.rmObject(this);
   }
 
   public void render()
