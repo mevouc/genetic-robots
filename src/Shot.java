@@ -10,6 +10,7 @@ public class Shot extends MovingObject
 
   static
   {
+    // http://opengameart.org/content/sci-fi-laser-fire-sfx
     player = new Sound("snd/laserfire02.wav");
     robot = new Sound("snd/laserfire01.wav");
   }
@@ -22,7 +23,6 @@ public class Shot extends MovingObject
     GeneticRobots.addCollider(this.collider);
     this.appearence = new PlayerBullet(new Vector(2), 0);
     this.shooter = shooter;
-    // http://opengameart.org/content/sci-fi-laser-fire-sfx
     player.play();
   }
 
@@ -35,7 +35,6 @@ public class Shot extends MovingObject
     GeneticRobots.addCollider(this.collider);
     this.appearence = new RobotBullet(new Vector(2), 0, color);
     this.shooter = shooter;
-    // http://opengameart.org/content/sci-fi-laser-fire-sfx
     robot.play();
   }
 

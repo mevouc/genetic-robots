@@ -21,6 +21,5 @@ public class Explosion extends Animation
   protected void destroy()
   {
     GeneticRobots.rmObject(this);
-    boom.stop();
   }
 }

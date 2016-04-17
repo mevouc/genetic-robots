@@ -871,23 +871,8 @@ public final class SteveDraw implements ActionListener, MouseListener, MouseMoti
      * @param degrees is the number of degrees to rotate counterclockwise
      * @throws IllegalArgumentException if the image is corrupt
      */
-/*    public static void picture(double x, double y, String s, double n, double degrees)
-    {
-      
-      // http://stackoverflow.com/questions/672916/how-to-get-image-height-and-width-using-java
-      try
-      {
-        BufferedImage bimg = ImageIO.read(new File(s));
-        double w = n * bimg.getWidth();
-        double h = n * bimg.getHeight();
-        picture(x, y, s, w, h, degrees);
-      }
-      catch (Exception e)
-      {
-        throw new IllegalArgumentException("Invalid path.");
-      }
-    }
-*/
+
+
     /**
      * Draw picture (gif, jpg, or png) centered on (x, y), rotated
      * given number of degrees, rescaled to w-by-h.

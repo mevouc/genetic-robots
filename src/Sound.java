@@ -8,56 +8,6 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/*
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
-import javafx.embed.swing.JFXPanel;
-import java.lang.Thread;
-import java.lang.Runnable;
-
-public class Sound
-{
-  private final String path;
-  private final Media media;
-  private final MediaPlayer mediaPlayer;
-  
-  static
-  {
-    JFXPanel fxPanel = new JFXPanel();
-  }
-  
-  public Sound(String path)
-  {
-    this.path = path;
-    URL file = this.getClass().getClassLoader().getResource(this.path);
-    this.media = new Media(file.toString());
-    this.mediaPlayer = new MediaPlayer(this.media);
-  }
-
-  public void play()
-  {
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    executor.submit(() ->
-    {
-      this.mediaPlayer.play();
-    });
-  }
-
-  public void stop()
-  {
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    executor.submit(() ->
-    {
-      this.mediaPlayer.stop();
-    });
-  }
-
-  public boolean isPlaying()
-  {
-    return false;
-  }
-}
-/*/
 public class Sound
 {
   private final String path;
