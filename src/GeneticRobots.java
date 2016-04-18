@@ -7,10 +7,6 @@
  * Compilation: make
  * Execution:   make run
  *
- * TODO:
- * -----
- *  - Remove all TODO instructions and useless comments
- *
  * ****************************************************************************/
 
 import java.awt.Color;

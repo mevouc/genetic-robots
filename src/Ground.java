@@ -2,7 +2,7 @@
  * This class define the properties of the ground of the game.
  * @see GameObject
  */
-public class Ground extends GameObject
+public final class Ground extends GameObject
 {
   /**
    * Initialize the fields of this object.

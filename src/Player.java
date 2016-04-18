@@ -6,7 +6,7 @@ import java.awt.Color;
  * @see MovingObject
  * @see IShooter
  */
-public class Player extends MovingObject implements IShooter
+public final class Player extends MovingObject implements IShooter
 {
   private final Score score;
   private final Collider collider;

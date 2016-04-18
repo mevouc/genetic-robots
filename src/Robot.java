@@ -6,7 +6,8 @@ import java.awt.Color;
  * @see IShooter
  * @see Comparable
  */
-public class Robot extends MovingObject implements IShooter, Comparable<Robot>
+public final class Robot extends MovingObject
+                         implements IShooter, Comparable<Robot>
 {
   private final double damage;
   private double inflictedDamage;
