@@ -1,9 +1,17 @@
 import java.awt.Color;
 
-public class Blood extends Animation
+/**
+ * This class represents the animation of blood produced by a shot hit.
+ * @see Animation
+ */
+public final class Blood extends Animation
 {
-  private Color color;
-
+  /**
+   * Create blood of a certain color at a given position, with a given angle.
+   * @param position the position of the blood.
+   * @param angle the direction of the splash (in degrees).
+   * @param color the blood color.
+   */
   public Blood(Vector position, double angle, Color color)
   {
     this.position = position;

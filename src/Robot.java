@@ -1,5 +1,11 @@
 import java.awt.Color;
 
+/**
+ * This class defines the behaviour of the robots and their properties.
+ * @see MovingObject
+ * @see IShooter
+ * @see Comparable
+ */
 public class Robot extends MovingObject implements IShooter, Comparable<Robot>
 {
   private final double damage;
@@ -13,6 +19,17 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
   private final Collider collider;
   private long lastShot;
 
+  /**
+   * Create a new robot at the given pos, with the given capacity to accelerate,
+   * the given maximum speed, damage, life, fire frequency and color.
+   * @param pos the positino to create the robot
+   * @param speedUp the capacity to accelerate
+   * @param maxSpeed the maximum speed
+   * @param damage the damage this robot will inflict
+   * @param life the number of life points
+   * @param fireFreq the fire frequency
+   * @param color the color
+   */
   public Robot(Vector pos, double speedUp, double maxSpeed, double damage,
       double life, double fireFreq, Color color)
   {
@@ -27,11 +44,15 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     this.lifeBar = new LifeBar(0.03, 0.002);
     this.direction = new Vector(Math.random() - 0.5, Math.random() - 0.5);
     this.color = color;
-    this.appearence = new RobotBody(this.color, 0.032, new Vector(2), 0);
+    this.appearence = new RobotBody(this.color, 0.032);
     this.collider = new Collider(0.025, position, Tag.ROBOT, this);
     GeneticRobots.addCollider(this.collider);
   }
 
+  /**
+   * Lose the given amount of life points.
+   * @param lifeLost life points to lose
+   */
   public void loseLife(double lifeLost)
   {
     this.life -= lifeLost;
@@ -39,6 +60,7 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
       this.life = 0;
   }
 
+  // destroy this robot and play the explosion
   private void die()
   {
     GeneticRobots.rmCollider(this.collider);
@@ -48,11 +70,18 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     GeneticRobots.addObject(explosion);
   }
 
+  /**
+   * State whether or not thi robot is dead.
+   * @return true if his life is positive, false otherwise
+   */
   public boolean isDead()
   {
     return this.life <= 0;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void shoot(Vector direction)
   {
     if (System.currentTimeMillis() - this.lastShot < 1 / this.fireFreq)
@@ -63,11 +92,17 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     this.lastShot = System.currentTimeMillis();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void reward(double damage)
   {
     inflictedDamage += damage;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public int compareTo(Robot that)
   {
     if (this.inflictedDamage > that.inflictedDamage)
@@ -75,36 +110,57 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     return (int)(this.timeLived - that.timeLived);
   }
 
+  /**
+   * Get the current amount of life point of this robot.
+   */
   public double getLife()
   {
     return this.life;
   }
 
+  /**
+   * Get the maximum amount of life points this robot can have.
+   */
   public double getMaxLife()
   {
     return this.maxLife;
   }
 
+  /**
+   * Get the maximum speed of this robot.
+   */
   public double getMaxSpeed()
   {
     return this.maxSpeed;
   }
 
+  /**
+   * Get the damage this robot can inflict.
+   */
   public double getDamage()
   {
     return this.damage;
   }
 
+  /**
+   * Get the force this robot will use to hit the player.
+   */
   public double getHitForce()
   {
     return this.damage * 5;
   }
 
+  /**
+   * Get the fire frequency.
+   */
   public double getFireFreq()
   {
     return this.fireFreq;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void update(long elapsedTime)
   {
     if (life <= 0)
@@ -120,18 +176,19 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
       this.goingUp = (aim.cartesian(1) > 0);
       this.goingDown = (aim.cartesian(1) < 0);
       shoot(this.direction);
-      if (!speed.isZero())
+      if (!this.speed.isZero())
         brake();
       accelerate(aim);
       move();
       Collision collision;
-      if ((collision = collider.isColliding()) != null)
+      if ((collision = this.collider.isColliding()) != null)
       {
         Tag tag = collision.getTag();
         if (tag != Tag.ROBOTSHOT && tag != Tag.BONUS)
         {
           if (tag == Tag.PLAYERSHOT)
           {
+            // take shot and display blood
             Shot shot = (Shot)(collision.getObject());
             loseLife(shot.getDamage());
             shot.destroy();
@@ -141,6 +198,7 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
           }
           else
           {
+            // move according to this collision
             this.position = oldPosition;
             move(collision.getForce());
           }
@@ -150,10 +208,13 @@ public class Robot extends MovingObject implements IShooter, Comparable<Robot>
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void render()
   {
-    Vector displayPos = GeneticRobots.centerOnPlayer(position);
-    this.appearence.render(displayPos, direction.angle());
+    Vector displayPos = GeneticRobots.centerOnPlayer(this.position);
+    this.appearence.render(displayPos, this.direction.angle());
     this.lifeBar.draw(displayPos.plus(new Vector(0.0, 0.03)),
         this.life / (double)this.maxLife);
   }

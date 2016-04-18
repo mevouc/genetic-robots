@@ -1,17 +1,29 @@
-public class RobotHead extends Template
+/**
+ * This class defines the appearence of the head of the robots.
+ * @see Template
+ * @see Robot
+ */
+public final class RobotHead extends Template
 {
-  public RobotHead(Vector relativePos, double relativeAngle)
+  /**
+   * Create a new robot head.
+   */
+  public RobotHead()
   {
-    super(relativePos, relativeAngle);
-    childs.add(new RobotEye(new Vector(0.025, 0.015), 0));
-    childs.add(new RobotEye(new Vector(0.025, - 0.015), 0));
+    super();
+    childs.add(new RobotEye(new Vector(0.025, 0.015)));
+    childs.add(new RobotEye(new Vector(0.025, - 0.015)));
   }
 
+  // what to draw
   private void draw(double x, double y, double angle)
   {
     SteveDraw.picture(x, y, "img/robothead.png", angle - 90);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void display(Vector position, double angle)
   {
     draw(position.cartesian(0), position.cartesian(1), angle);

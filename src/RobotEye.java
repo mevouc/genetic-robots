@@ -1,12 +1,23 @@
 import java.awt.Color;
 
-public class RobotEye extends Template
+/**
+ * This class defines the appearence of the eyes of the robot.
+ * @see Template
+ * @see Robot
+ */
+public final class RobotEye extends Template
 {
-  public RobotEye(Vector relativePos, double relativeAngle)
+  /**
+   * Create an eye with the given relative position.
+   */
+  public RobotEye(Vector relativePos)
   {
-    super(relativePos, relativeAngle);
+    super(relativePos, 0);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   protected void display(Vector position, double angle)
   {
     SteveDraw.setPenColor(Color.white);

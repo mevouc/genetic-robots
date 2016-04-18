@@ -1,18 +1,29 @@
 import java.awt.Color;
 
-public class RobotBody extends Template
+/**
+ * This class defines the appearence of the robots bodies.
+ * @see Template
+ * @see Robot
+ */
+public final class RobotBody extends Template
 {
   private final Color color;
   private final double size;
 
-  public RobotBody(Color color, double size, Vector relativePos, double angle)
+  /**
+   * Create the body of the given color, size.
+   * @param color the color of the body
+   * @param size the size
+   */
+  public RobotBody(Color color, double size)
   {
-    super(relativePos, angle);
+    super();
     this.color = color;
     this.size = size;
-    childs.add(new RobotHead(new Vector(0.0, 0.0), 0.0));
+    childs.add(new RobotHead());
   }
 
+  // bound a value between 2 others
   private double bound(double a, double left, double right)
   {
     if (right < left)
@@ -28,6 +39,7 @@ public class RobotBody extends Template
     return a;
   }
 
+  // determine the size of the pointer to this robot, depending on the distance
   private double sizePointer(double distance)
   {
     double radius = size / 1.5 - (distance - 0.5) / 10;
@@ -37,6 +49,7 @@ public class RobotBody extends Template
     return radius;
   }
 
+  // display on the edge of the screen a pointer to the robot
   private void pointer(Vector position)
   {
     double x = bound(position.cartesian(0), 0.02, 0.98);
@@ -47,11 +60,15 @@ public class RobotBody extends Template
     SteveDraw.filledTriangle(x, y, sizePointer(distance), direction.angle());
   }
 
+  // what to draw
   private void draw(double x, double y, double angle)
   {
     SteveDraw.filledCircle(x, y, size / 2);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void display(Vector position, double angle)
   {
     SteveDraw.setPenColor(this.color);

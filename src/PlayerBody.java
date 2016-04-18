@@ -1,26 +1,30 @@
-import java.awt.Color;
-
-public class PlayerBody extends Template
+/**
+ * This class defines the appearence of the body of the player.
+ * @see Template
+ * @see Player
+ */
+public final class PlayerBody extends Template
 {
-  private final Color color;
-  private final double size;
-
-  public PlayerBody(Color color, double size, Vector relativePos, double angle)
+  /**
+   * Create the body.
+   */
+  public PlayerBody()
   {
-    super(relativePos, angle);
-    this.color = color;
-    this.size = size;
-    childs.add(new Gun(new Vector(0.025, 0.0), 0));
+    super();
+    this.childs.add(new Gun(new Vector(0.025, 0.0), 0));
   }
 
-  private void draw(double x, double y, double angle)
+  // draw the sprite
+  private void draw(double x, double y)
   {
     SteveDraw.picture(x, y, "img/playerbody.png", 0);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void display(Vector position, double angle)
   {
-    SteveDraw.setPenColor(this.color);
-    draw(position.cartesian(0), position.cartesian(1), angle);
+    draw(position.cartesian(0), position.cartesian(1));
   }
 }

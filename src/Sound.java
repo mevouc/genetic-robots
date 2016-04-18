@@ -8,12 +8,21 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Sound
+/**
+ * This class provides methods and fields to easily create, play and stop sounds
+ * in the game.
+ * @see stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+ */
+public final class Sound
 {
   private final String path;
   private Clip clip;
   private AudioInputStream audioIn;
 
+  /**
+   * Create a new sound, defined by the file at the given path.
+   * @param path the relative file path to the sound to create.
+   */
   public Sound(String path)
   {
     this.path = path;
@@ -45,6 +54,9 @@ public class Sound
     }
   }
 
+  /**
+   * Play the sound. Restart it from the beginning if it is already started.
+   */
   public void play()
   {
     try
@@ -58,6 +70,9 @@ public class Sound
     }
   }
 
+  /**
+   * Stop the sound.
+   */
   public void stop()
   {
     try
@@ -71,6 +86,10 @@ public class Sound
     }
   }
 
+  /**
+   * State whether or not the song is playing.
+   * @return true if the song is currently playing, false otherwise.
+   */
   public boolean isPlaying()
   {
     boolean bool = false;

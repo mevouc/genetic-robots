@@ -1,10 +1,21 @@
-public class PlayerBullet extends Template
+/**
+ * This class defines the appearence of a bullet thrown by the player.
+ * @see Template
+ * @see Shot
+ */
+public final class PlayerBullet extends Template
 {
-  public PlayerBullet(Vector relativePos, double relativeAngle)
+  /**
+   * Initialize with default values the fields of the template.
+   */
+  public PlayerBullet()
   {
-    super(relativePos, relativeAngle);
+    super();
   }
 
+  /**
+   * {@inheriteDoc}
+   */
   protected void display(Vector position, double angle)
   {
     SteveDraw.picture(position.cartesian(0), position.cartesian(1),

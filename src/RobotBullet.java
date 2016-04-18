@@ -1,20 +1,29 @@
 import java.awt.Color;
 
-public class RobotBullet extends Template
+/**
+ * This class defines the appearence of a bullet thrown by a robot.
+ * @see Template
+ * @see Shot
+ */
+public final class RobotBullet extends Template
 {
-  Color color;
+  private final Color color;
   
-  public RobotBullet(Vector relativePos, double relativeAngle, Color color)
+  public RobotBullet(Color color)
   {
-    super(relativePos, relativeAngle);
+    super();
     this.color = color;
   }
 
+  // draw a rotated rectangle
   private void draw(double x, double y, double theta)
   {
     SteveDraw.filledRectangle(x, y, 0.016, 0.0042, theta);
   }
   
+  /**
+   * {@inheritDoc}
+   */
   protected void display(Vector position, double angle)
   {
     SteveDraw.setPenColor(this.color);

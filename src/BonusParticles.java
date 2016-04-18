@@ -1,10 +1,21 @@
 import java.awt.Color;
 
-public class BonusParticles extends Template
+/**
+ * This class defines the behaviour of the appearence of the group of particles
+ * attached to a bonus.
+ * @see Template
+ * @see Bonus
+ */
+public final class BonusParticles extends Template
 {
   private final Color color;
   private final double radius;
 
+  /**
+   * Create this group of particles with the given radius and the given color.
+   * @param radius the radius of the group of particles.
+   * @param color the color of the particles.
+   */
   public BonusParticles(double radius, Color color)
   {
     super(new Vector(0, 0), 0);
@@ -17,6 +28,7 @@ public class BonusParticles extends Template
     }
   }
 
+  // bound a value between 2 others
   private double bound(double a, double left, double right)
   {
     if (right < left)
@@ -32,6 +44,7 @@ public class BonusParticles extends Template
     return a;
   }
 
+  // determine the size of the pointer to this bonus, depending on the distance
   private double sizePointer(double distance)
   {
     double size = radius * 2 / 1.5 - (distance - 0.5) / 10;
@@ -41,6 +54,7 @@ public class BonusParticles extends Template
     return size;
   }
 
+  // display on the edge of the screen a pointer to the bonus
   private void pointer(Vector position)
   {
     double x = bound(position.cartesian(0), 0.02, 0.98);
@@ -54,6 +68,9 @@ public class BonusParticles extends Template
     SteveDraw.triangle(x, y, sizePointer(distance), direction.angle());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   protected void display(Vector position, double angle)
   {
     Vector playerPos = GeneticRobots.getPlayer().getPosition();

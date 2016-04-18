@@ -5,11 +5,17 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 
-public class LeaderBoard
+/**
+ * This class defines the properties of the leader board and how it sort the
+ * scores.
+ * @see Score
+ */
+public final class LeaderBoard
 {
   private File scoresBackUp;
   private List<Score> scores;
 
+  // create a file to save the scores if no file exists
   private void createFileIfNecessary(File file)
   {
     try
@@ -32,6 +38,10 @@ public class LeaderBoard
     }
   }
 
+  /**
+   * Create a new leader board associated with the given path.
+   * @param path the path of the file
+   */
   public LeaderBoard(String path)
   {
     this.scoresBackUp = new File(path);

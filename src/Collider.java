@@ -1,12 +1,25 @@
 import java.awt.Color;
 
-public class Collider implements ICollider
+/**
+ * This class defines the behaviour of the collider component attached to
+ * several objects.
+ * @see Collision
+ */
+public final class Collider
 {
   private final double radius;
   private Vector position;
   private final Tag tag;
   private final GameObject obj;
 
+  /**
+   * Create a collider with the given radius, at the given position with the
+   * given tag, attached to the given object.
+   * @param radius the radius of the collidebox
+   * @param position the position of the collider
+   * @param tag the tag
+   * @param obj the game object to which this collider will be attached
+   */
   public Collider(double radius, Vector position, Tag tag, GameObject obj)
   {
     this.radius = radius;
@@ -15,23 +28,33 @@ public class Collider implements ICollider
     this.obj = obj;
   }
 
+  /**
+   * Get this collider radius.
+   */
   public double getRadius()
   {
     return this.radius;
   }
 
+  /**
+   * Get the position of this collider
+   */
   public Vector getPosition()
   {
     return this.position;
   }
 
+  /**
+   * Set the position to the given one.
+   * @param position the new position
+   */
   public void setPosition(Vector position)
   {
     this.position = position;
   }
 
-  // return null if not Colliding, a Vector representing the force of collision
-  public Collision isColliding(ICollider that)
+  // return null if not Colliding, the collision which occurs
+  private Collision isColliding(Collider that)
   {
     Vector toThat = that.getPosition().minus(this.position);
     if (toThat.isZero())
@@ -43,11 +66,16 @@ public class Collider implements ICollider
     return null;
   }
   
-  // is colliding to any of the others colliders
+  /**
+   * Say if this collider is colliding with any of the others colliders of the
+   * game.
+   * @return the collision which occurs between the other object it collides
+   * with if there is collision, null otherwise
+   */
   public Collision isColliding()
   {
     Collision tmp;
-    for (ICollider thatCollider : GeneticRobots.getColliders())
+    for (Collider thatCollider : GeneticRobots.getColliders())
     {
       if (thatCollider != this && ((tmp = isColliding(thatCollider)) != null))
         return tmp;
@@ -55,11 +83,17 @@ public class Collider implements ICollider
     return null;
   }
 
+  /**
+   * Get this collider tag.
+   */
   public Tag getTag()
   {
     return this.tag;
   }
 
+  /**
+   * Get the object to which this collider is attached to.
+   */
   public GameObject getObject()
   {
     return this.obj;
