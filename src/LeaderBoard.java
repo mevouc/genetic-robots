@@ -74,6 +74,7 @@ public final class LeaderBoard
     return true;
   }
 
+  // create the object to write in the file
   private FileWriter createWriter(File file)
   {
     FileWriter fw = null;
@@ -89,6 +90,7 @@ public final class LeaderBoard
     return fw;
   }
 
+  // save the score in the file
   private boolean saveScore(FileWriter writer, Score score)
   {
     try
@@ -105,6 +107,7 @@ public final class LeaderBoard
     return true;
   }
 
+  // save all the scores in the file
   private void saveScores()
   {
     if (!setWritableIfNecessary(this.scoresBackUp))
@@ -144,6 +147,7 @@ public final class LeaderBoard
     return true;
   }
 
+  // create object to read in file
   private FileReader createReader(File file)
   {
     FileReader fd = null;
@@ -159,6 +163,7 @@ public final class LeaderBoard
     return fd;
   }
 
+  // read all the chars in the file
   private String readChars(FileReader reader)
   {
     int len = 512;
@@ -175,6 +180,7 @@ public final class LeaderBoard
     return new String(cbuf);
   }
 
+  // transform the string read in the file into an ArrayList of Scores
   private ArrayList<Score> processOnString(String str)
   {
     String[] lines = str.split("\n");
@@ -184,6 +190,7 @@ public final class LeaderBoard
     return scores;
   }
 
+  // read the scores in  the file and save them in the instance field scores
   private void readScores()
   {
     if (!setReadableIfNecessary(this.scoresBackUp))
@@ -197,17 +204,24 @@ public final class LeaderBoard
     this.scores = processOnString(str);
   }
 
+  // sort the scores
   private void sortScores()
   {
     Collections.sort(this.scores);
   }
 
+  // keep the 5 best scores
   private void keep5Scores()
   {
     while (this.scores.size() > 5)
       this.scores.remove(5);
   }
 
+  /**
+   * Get a string representation of the leaderboard.
+   * @return a string representing on 6 lines the 5 best scores and columns
+   * titles
+   */
   public String toString()
   {
     String str = "Pseudo     Robots  Time\n";
@@ -216,7 +230,13 @@ public final class LeaderBoard
     return str;
   }
 
-  // return the String representation of the leaderboard 
+  /**
+   * Add a new Score in the leader board and get a string representing the new
+   * leader board.
+   * @param newScore the score to add in the leader board
+   * @return a string representing on 6 lines the 5 best scores and columns
+   * titles
+   */
   public String addScore(Score newScore)
   {
     readScores();
